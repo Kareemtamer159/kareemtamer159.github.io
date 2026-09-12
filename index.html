@@ -145,6 +145,15 @@
   }
   .tab-link:hover{ color:var(--ink); background:var(--paper-2); }
   body.show-ar .tab-link{ font-family:'Tajawal', sans-serif; }
+  .nav-divider{ width:1px; align-self:stretch; margin:0 0.3rem; background:var(--line); }
+  .highlight-chip{
+    display:inline-flex; align-items:center; font-family:'Courier Prime', monospace; font-size:0.72rem;
+    padding:0.3rem 0.7rem; border:1px solid var(--line); border-radius:9999px; color:var(--ink-soft);
+    background:var(--card);
+  }
+  body.show-ar .highlight-chip{ font-family:'Tajawal', sans-serif; }
+  .verify-link{ display:inline-block; margin-top:0.35rem; font-family:'Courier Prime', monospace; font-size:0.68rem; color:var(--navy); text-decoration:underline; text-underline-offset:2px; }
+  body.show-ar .verify-link{ font-family:'Tajawal', sans-serif; }
 
   .folder-tab{ position:relative; }
   .folder-tab .tab-label{
@@ -234,6 +243,7 @@
       <a href="#experience" class="tab-link"><span class="lang-en">experience</span><span class="lang-ar">الخبرات</span></a>
       <a href="#certifications" class="tab-link"><span class="lang-en">credentials</span><span class="lang-ar">الشهادات</span></a>
       <a href="#labs" class="tab-link"><span class="lang-en">field notes</span><span class="lang-ar">ملاحظات ميدانية</span></a>
+      <span class="nav-divider" aria-hidden="true"></span>
       <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="tab-link"><span class="lang-en">github</span><span class="lang-ar">GitHub</span></a>
       <button id="langToggle" class="tab-link mono">EN / AR</button>
       <button id="modeToggle" class="tab-link mono" aria-label="Toggle dark/light mode">☀</button>
@@ -357,6 +367,12 @@
         <span class="lang-en">Senior Cybersecurity student at ECU and aspiring penetration tester passionate about offensive security, network security and red teaming. Backed by certified networking foundations (NVIDIA, Packet), he approaches vulnerability assessment with an attacker's mindset to identify, exploit and remediate system weaknesses. He actively upskills through PortSwigger Web Security Academy and TryHackMe, and is currently completing the Certified Penetration Testing Specialist (CPTS) path on Hack The Box.</span>
         <span class="lang-ar">طالب سنة رابعة أمن سيبراني في الجامعة المصرية الصينية، ومختبر اختراق طموح شغوف بالـ offensive security وأمن الشبكات والـ red teaming. حاصل على أساسيات شبكات موثقة (NVIDIA, Packet)، وبيتعامل مع تقييم الثغرات بعقلية مهاجم عشان يكتشف الثغرات ويستغلها ويصلّحها. بيطوّر نفسه باستمرار عن طريق PortSwigger Web Security Academy وTryHackMe، وحاليًا بيكمّل مسار Certified Penetration Testing Specialist (CPTS) على Hack The Box.</span>
       </p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="highlight-chip">Offensive Security</span>
+        <span class="highlight-chip"><span class="lang-en">Web &amp; Network Exploitation</span><span class="lang-ar">استغلال الويب والشبكات</span></span>
+        <span class="highlight-chip"><span class="lang-en">Red Teaming</span><span class="lang-ar">Red Teaming</span></span>
+        <span class="highlight-chip">CPTS <span class="lang-en">path</span><span class="lang-ar">مسار</span></span>
+      </div>
     </div>
     <div class="dossier-card p-5 reveal" style="transition-delay:.1s;">
       <div class="field-row"><span class="mono text-xs" style="color:var(--ink-soft);">LOCATION</span><span class="text-sm text-right"><span class="lang-en">Cairo, Egypt</span><span class="lang-ar">القاهرة، مصر</span></span></div>
@@ -371,23 +387,23 @@
     <p class="mono text-xs mb-4" style="color:var(--ink-soft);">THREAT COMPETENCY METER</p>
     <div class="space-y-4">
       <div>
-        <div class="flex justify-between text-sm mb-1"><span><span class="lang-en">Penetration Testing</span><span class="lang-ar">اختبار الاختراق</span></span><span class="mono text-xs" style="color:var(--red);">CRITICAL</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Penetration Testing</span><span class="lang-ar">اختبار الاختراق</span></span><span class="mono text-xs" style="color:var(--red);">CRITICAL</span></div>
         <div class="meter-track" data-percent="95"><div class="meter-fill" style="background:var(--red);"></div></div>
       </div>
       <div>
-        <div class="flex justify-between text-sm mb-1"><span><span class="lang-en">Offensive Security &amp; Red Teaming</span><span class="lang-ar">الأمن الهجومي وRed Teaming</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Offensive Security &amp; Red Teaming</span><span class="lang-ar">الأمن الهجومي وRed Teaming</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
         <div class="meter-track" data-percent="85"><div class="meter-fill" style="background:var(--navy);"></div></div>
       </div>
       <div>
-        <div class="flex justify-between text-sm mb-1"><span><span class="lang-en">Web Exploitation (SQLi · XSS · IDOR · SSRF · CSRF)</span><span class="lang-ar">استغلال الويب (SQLi · XSS · IDOR · SSRF · CSRF)</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Web Exploitation (SQLi · XSS · IDOR · SSRF · CSRF)</span><span class="lang-ar">استغلال الويب (SQLi · XSS · IDOR · SSRF · CSRF)</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
         <div class="meter-track" data-percent="82"><div class="meter-fill" style="background:var(--navy);"></div></div>
       </div>
       <div>
-        <div class="flex justify-between text-sm mb-1"><span><span class="lang-en">Network Security &amp; Protocols</span><span class="lang-ar">أمن الشبكات والبروتوكولات</span></span><span class="mono text-xs" style="color:var(--gold);">MODERATE</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Network Security &amp; Protocols</span><span class="lang-ar">أمن الشبكات والبروتوكولات</span></span><span class="mono text-xs" style="color:var(--gold);">MODERATE</span></div>
         <div class="meter-track" data-percent="68"><div class="meter-fill" style="background:var(--gold);"></div></div>
       </div>
       <div>
-        <div class="flex justify-between text-sm mb-1"><span>Burp Suite · Nmap · Metasploit · Python</span><span class="mono text-xs" style="color:var(--gold);">MODERATE</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span>Burp Suite · Nmap · Metasploit · Python</span><span class="mono text-xs" style="color:var(--gold);">MODERATE</span></div>
         <div class="meter-track" data-percent="65"><div class="meter-fill" style="background:var(--gold);"></div></div>
       </div>
     </div>
@@ -474,7 +490,8 @@
 
 <!-- CERTIFICATIONS -->
 <section id="certifications" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
-  <p class="mono text-xs mb-8" style="color:var(--ink-soft);">EXHIBIT C — <span class="lang-en">CREDENTIALS ON FILE</span><span class="lang-ar">الشهادات الموثقة</span></p>
+  <p class="mono text-xs mb-2" style="color:var(--ink-soft);">EXHIBIT C — <span class="lang-en">CREDENTIALS ON FILE</span><span class="lang-ar">الشهادات الموثقة</span></p>
+  <p class="text-sm mb-8 max-w-lg" style="color:var(--ink-soft);"><span class="lang-en">Verifiable online: course certificates link to their public verification page, and hands-on work is visible on GitHub.</span><span class="lang-ar">قابلة للتحقق أونلاين: شهادات الكورسات فيها لينك تحقق رسمي، والشغل العملي موجود ومتاح على GitHub.</span></p>
 
   <div class="grid sm:grid-cols-2 gap-4 mb-10">
     <div class="dossier-card reveal p-5 flex items-center gap-4">
@@ -503,6 +520,7 @@
       <div>
         <h4 class="text-sm font-bold"><span class="lang-en">Introduction to Networking</span><span class="lang-ar">مقدمة في الشبكات</span></h4>
         <p class="mono text-xs mt-1" style="color:var(--ink-soft);">NVIDIA · Coursera · Sep 2025</p>
+        <a href="https://coursera.org/verify/G8U1G56VNALL" target="_blank" rel="noopener" class="verify-link"><span class="lang-en">Verify credential ↗</span><span class="lang-ar">تحقّق من الشهادة ↗</span></a>
       </div>
     </div>
     <div class="dossier-card reveal p-5 flex items-center gap-4" style="transition-delay:.2s;">
@@ -510,6 +528,7 @@
       <div>
         <h4 class="text-sm font-bold"><span class="lang-en">Networking Fundamentals &amp; Physical Networks</span><span class="lang-ar">أساسيات الشبكات والشبكات الفعلية</span></h4>
         <p class="mono text-xs mt-1" style="color:var(--ink-soft);">Packt · Coursera · Sep 2025</p>
+        <a href="https://coursera.org/verify/JJ8WAQT34RI0" target="_blank" rel="noopener" class="verify-link"><span class="lang-en">Verify credential ↗</span><span class="lang-ar">تحقّق من الشهادة ↗</span></a>
       </div>
     </div>
     <div class="dossier-card reveal p-5 flex items-center gap-4" style="transition-delay:.25s;">
