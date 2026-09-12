@@ -121,6 +121,8 @@
   }
   body:not(.light-mode) #spotlight{ opacity:1; }
   @media (prefers-reduced-motion: reduce){ #spotlight{ display:none; } }
+
+  #dustCanvas{ position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
   body.show-ar .stampmark{ font-family:'Tajawal', sans-serif; letter-spacing:0; }
   @keyframes stampIn{
     0%{ opacity:0; transform: translateY(-36px) rotate(-30deg) scale(1.6); }
@@ -189,12 +191,38 @@
   a.underline-hover:hover{ background-size:100% 1.5px; }
   :focus-visible{ outline:2px solid var(--red); outline-offset:3px; }
 
+  .contact-row{
+    display:flex; align-items:center; gap:0.75rem; border:1px solid var(--line);
+    padding:0.7rem 0.9rem; transition: border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+  .contact-row:hover{ border-color:var(--red); transform: translateX(3px); background: rgba(158,43,37,0.04); }
+  .contact-badge{
+    flex-shrink:0; width:30px; height:30px; border-radius:6px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-family:'Courier Prime', monospace;
+    font-size:0.75rem; color:var(--ink-soft); background:var(--paper-2);
+  }
+  .contact-link{ flex:1; min-width:0; }
+  .copy-btn{
+    flex-shrink:0; width:28px; height:28px; border-radius:4px; border:1px solid transparent;
+    color:var(--ink-soft); font-size:0.95rem; cursor:pointer; background:transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .copy-btn:hover{ color:var(--red); border-color:var(--line); }
+  .copy-btn.copied{ color:#3DAA6E; }
+
+  .contact-seal{
+    position:absolute; top:-22px; right:-14px; width:80px; height:80px; font-size:0.6rem;
+    animation-delay:.1s;
+  }
+  @media (max-width: 640px){ .contact-seal{ display:none; } }
+
   body:not(.light-mode) h1{ text-shadow: 0 0 34px rgba(255,71,87,0.18); }
   body:not(.light-mode) #contact a[href^="mailto"]{ box-shadow: 0 0 20px rgba(255,71,87,0.25); }
   body:not(.light-mode) .watermark{ color:var(--red); opacity:0.05; }
 </style>
 </head>
 <body class="antialiased">
+<canvas id="dustCanvas" aria-hidden="true"></canvas>
 <div id="spotlight"></div>
 
 <!-- NAV -->
@@ -597,21 +625,46 @@
         <span class="lang-en">Currently seeking penetration testing roles, offensive security projects and CTF collaborations. Send over the details and let's talk.</span>
         <span class="lang-ar">حاليًا بدوّر على وظيفة اختبار اختراق أو مشروع أمن هجومي، ومفتوح للتعاون في مسابقات CTF. ابعتلي التفاصيل ونتكلم.</span>
       </p>
+      <div class="mt-8 hidden md:block">
+        <svg width="150" height="60" viewBox="0 0 150 60" style="color:var(--red); opacity:0.8;">
+          <path d="M5 40 C 20 10, 30 50, 45 25 S 70 5, 85 30 S 110 45, 130 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p class="mono text-xs" style="color:var(--ink-soft);">K. Tamer</p>
+      </div>
     </div>
-    <div class="dossier-card p-6">
+    <div class="dossier-card p-6 relative overflow-visible">
+      <span class="stampmark contact-seal">
+        <span class="text-[0.55rem] leading-tight px-1"><span class="lang-en">VERIFIED<br/>CONTACT</span><span class="lang-ar">تواصل<br/>موثّق</span></span>
+      </span>
       <p class="mono text-xs mb-4" style="color:var(--ink-soft);">~/contact/verified-channels</p>
       <div class="space-y-3">
-        <a href="mailto:kareem.tamer.ismael@gmail.com" class="flex items-center justify-between gap-2 border-2 px-4 py-3 text-sm font-medium" style="border-color:var(--ink);">
-          <span class="break-all">kareem.tamer.ismael@gmail.com</span><span class="mono text-xs shrink-0">→</span>
-        </a>
-        <a href="https://www.linkedin.com/in/kareem-tamer-481894290/" target="_blank" rel="noopener" class="flex items-center justify-between border px-4 py-3 text-sm" style="border-color:var(--line);">
-          <span><span class="lang-en">LinkedIn profile</span><span class="lang-ar">حساب LinkedIn</span></span><span class="mono text-xs">→</span>
-        </a>
-        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="flex items-center justify-between border px-4 py-3 text-sm" style="border-color:var(--line);">
-          <span>GitHub — Kareemtamer159</span><span class="mono text-xs">→</span>
-        </a>
-        <div class="flex items-center justify-between border px-4 py-3 text-sm mono" style="border-color:var(--line); color:var(--ink-soft);">
-          <span><span class="lang-en">Phone</span><span class="lang-ar">تليفون</span></span><span>01141483811</span>
+        <div class="contact-row" style="border-color:var(--ink); border-width:2px;">
+          <span class="contact-badge">@</span>
+          <a href="mailto:kareem.tamer.ismael@gmail.com" class="contact-link">
+            <span class="break-all text-sm font-medium">kareem.tamer.ismael@gmail.com</span>
+          </a>
+          <button type="button" class="copy-btn" data-copy="kareem.tamer.ismael@gmail.com" aria-label="Copy email" title="Copy">⧉</button>
+        </div>
+        <div class="contact-row" style="border-color:var(--line);">
+          <span class="contact-badge">in</span>
+          <a href="https://www.linkedin.com/in/kareem-tamer-481894290/" target="_blank" rel="noopener" class="contact-link">
+            <span class="text-sm"><span class="lang-en">LinkedIn profile</span><span class="lang-ar">حساب LinkedIn</span></span>
+          </a>
+          <span class="mono text-xs" style="color:var(--ink-soft);">↗</span>
+        </div>
+        <div class="contact-row" style="border-color:var(--line);">
+          <span class="contact-badge">gh</span>
+          <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="contact-link">
+            <span class="text-sm">GitHub — Kareemtamer159</span>
+          </a>
+          <span class="mono text-xs" style="color:var(--ink-soft);">↗</span>
+        </div>
+        <div class="contact-row" style="border-color:var(--line);">
+          <span class="contact-badge">☎</span>
+          <span class="contact-link" style="cursor:default;">
+            <span class="text-sm mono" style="color:var(--ink-soft);"><span class="lang-en">Phone</span><span class="lang-ar">تليفون</span> — 01141483811</span>
+          </span>
+          <button type="button" class="copy-btn" data-copy="01141483811" aria-label="Copy phone" title="Copy">⧉</button>
         </div>
       </div>
     </div>
@@ -626,6 +679,50 @@
 </footer>
 
 <script>
+  // ambient floating dust / light-mote background — reacts to light/dark mode
+  (function(){
+    const canvas = document.getElementById('dustCanvas');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let w, h, particles = [];
+    function isLight(){ return document.body.classList.contains('light-mode'); }
+    function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    function initParticles(){
+      const count = window.innerWidth < 640 ? 24 : 55;
+      particles = Array.from({length: count}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: Math.random()*1.6+0.6,
+        speed: Math.random()*0.22+0.06,
+        drift: (Math.random()-0.5)*0.14,
+        phase: Math.random()*Math.PI*2,
+        flicker: Math.random()*0.018+0.008
+      }));
+    }
+    function drawFrame(){
+      ctx.clearRect(0,0,w,h);
+      const light = isLight();
+      for(const p of particles){
+        if(!reduceMotion){
+          p.y -= p.speed; p.x += p.drift; p.phase += p.flicker;
+          if(p.y < -5){ p.y = h+5; p.x = Math.random()*w; }
+          if(p.x < -5) p.x = w+5;
+          if(p.x > w+5) p.x = -5;
+        }
+        const alpha = (Math.sin(p.phase)*0.25+0.55) * (light ? 0.16 : 0.34);
+        ctx.beginPath();
+        ctx.fillStyle = light ? `rgba(34,30,23,${alpha})` : `rgba(255,180,120,${alpha})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      if(!reduceMotion) requestAnimationFrame(drawFrame);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    initParticles();
+    drawFrame();
+  })();
+
   function toggleLang(){
     const body = document.body;
     const html = document.getElementById('htmlRoot');
@@ -714,6 +811,25 @@
       });
     }, { threshold: 0.2 });
     obs.observe(track);
+  });
+
+  // copy-to-clipboard for contact details
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy');
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch(e2){}
+        document.body.removeChild(ta);
+      }
+      const original = btn.textContent;
+      btn.textContent = '✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+    });
   });
 </script>
 </body>
