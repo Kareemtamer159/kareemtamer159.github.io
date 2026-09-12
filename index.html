@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kareem Tamer // Penetration Tester & Offensive Security Dossier</title>
-
-<!-- SEO & Social Graph Meta Tags -->
-<meta name="description" content="Kareem Tamer — Aspiring Penetration Tester & Offensive Security Researcher. Cybersecurity Case File showcasing live tooling, web & network vulnerability exploitation, and verified credentials." />
-<meta name="keywords" content="Kareem Tamer, Penetration Tester, Offensive Security, Cyber Security, Red Team, Burp Suite, Python, Nmap, CPTS, Egypt" />
+<title>Kareem Tamer — Penetration Tester | Offensive Security Portfolio</title>
+<meta name="description" content="Kareem Tamer — Cybersecurity Senior & Penetration Tester. Specializing in Web & Network Exploitation, Red Teaming, Vulnerability Assessment, and Custom Security Tooling." />
+<meta name="keywords" content="Kareem Tamer, Penetration Tester, Cybersecurity, Ethical Hacking, Red Team, Burp Suite, Metasploit, Python, Cairo Egypt, CPTS" />
 <meta name="author" content="Kareem Tamer" />
-<meta property="og:title" content="Kareem Tamer // Penetration Tester Dossier" />
-<meta property="og:description" content="Senior Cybersecurity Student & Offensive Security Practitioner. View classified operations, custom exploitation tools, and security credentials." />
+
+<!-- Open Graph / Social Media Preview -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://kareemtamer159.github.io/" />
-<meta name="twitter:card" content="summary_large_image" />
-
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+<meta property="og:title" content="Kareem Tamer // Penetration Tester Case File" />
+<meta property="og:description" content="Offensive Security practitioner & Penetration Tester. Case files, exploits, custom tooling, and security research." />
+<meta property="twitter:card" content="summary_large_image" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=PT+Serif:wght@400;700&family=Tajawal:wght@400;500;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=PT+Serif:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     /* deep night mode — default */
@@ -46,7 +44,7 @@
     --red:#9E2B25;
     --navy:#233B57;
     --gold:#9A7B23;
-    --green:#1E7E34;
+    --green:#1B8A4C;
     --line:#C9BE9F;
     --redact:#0A0A08;
     --glow: none;
@@ -70,7 +68,6 @@
   body.show-ar{ font-family:'Tajawal', 'PT Serif', serif; }
   .stamp{ font-family:'Special Elite', 'Courier Prime', monospace; }
   .mono{ font-family:'Courier Prime', monospace; }
-  .code{ font-family:'Fira Code', monospace; }
   body.show-ar .stamp, body.show-ar .mono{ font-family:'Tajawal', monospace; letter-spacing:0; }
 
   .lang-ar{ display:none; }
@@ -87,16 +84,33 @@
     background-repeat: repeat-x;
   }
 
+  /* Redacted secret text styling */
   .redact{
-    position:relative; display:inline-block; cursor:pointer; color:var(--red); font-weight:700; padding:0 3px;
-    border-radius:2px;
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    color:var(--red);
+    font-weight:700;
+    padding:0 3px;
+    user-select:none;
+    transition: color .2s ease;
   }
   .redact::after{
-    content:''; position:absolute; inset:-1px -3px; background:var(--redact);
-    border-radius:1px; transition: opacity .35s ease, transform .35s ease;
+    content:'';
+    position:absolute;
+    inset:-2px -4px;
+    background:var(--redact);
+    border-radius:2px;
+    transition: opacity .4s cubic-bezier(.2,.8,.2,1), transform .4s cubic-bezier(.2,.8,.2,1);
     transform-origin: right;
+    pointer-events: auto;
   }
-  .redact:hover::after, .redact:focus-visible::after, .redact.revealed::after{ opacity:0; transform:scaleX(0.03); }
+  /* Declassified state holds the text revealed for 60 seconds */
+  .redact.declassified::after{
+    opacity:0 !important;
+    transform:scaleX(0.02) !important;
+    pointer-events:none;
+  }
   @media (prefers-reduced-motion: reduce){ .redact::after{ transition:none; } }
 
   .stampmark{
@@ -160,8 +174,7 @@
     font-family:'Courier Prime', monospace; font-size:0.78rem;
     border:1px solid var(--line); border-bottom:none; border-radius:6px 6px 0 0;
     padding:0.4rem 0.85rem; background:var(--card); color:var(--ink-soft);
-    transition: color .2s ease, background .2s ease, border-color .2s ease;
-    display:inline-flex; align-items:center; gap:0.35rem;
+    transition: color .2s ease, background .2s ease;
   }
   .tab-link:hover{ color:var(--ink); background:var(--paper-2); }
   body.show-ar .tab-link{ font-family:'Tajawal', sans-serif; }
@@ -173,6 +186,13 @@
     background:var(--card);
   }
   body.show-ar .highlight-chip{ font-family:'Tajawal', sans-serif; }
+  
+  .badge-tag{
+    font-family:'Courier Prime', monospace; font-size:0.65rem; padding:2px 8px; border-radius:3px;
+    background:rgba(90,169,230,0.12); color:var(--navy); border:1px solid rgba(90,169,230,0.3);
+  }
+  body.light-mode .badge-tag{ background:rgba(35,59,87,0.1); color:var(--navy); border-color:var(--navy); }
+
   .verify-link{ display:inline-block; margin-top:0.35rem; font-family:'Courier Prime', monospace; font-size:0.68rem; color:var(--navy); text-decoration:underline; text-underline-offset:2px; }
   body.show-ar .verify-link{ font-family:'Tajawal', sans-serif; }
 
@@ -180,7 +200,7 @@
   .folder-tab .tab-label{
     position:absolute; top:-13px; font-family:'Courier Prime', monospace; font-size:0.68rem;
     background:var(--gold); color:var(--paper); padding:2px 10px; border-radius:2px 2px 0 0;
-    letter-spacing:0.08em; font-weight:700;
+    letter-spacing:0.08em; font-weight:bold;
   }
   body.show-ar .folder-tab .tab-label{ font-family:'Tajawal', sans-serif; letter-spacing:0; right:14px; left:auto; }
   [dir-flip] .folder-tab .tab-label{ left:auto; right:14px; }
@@ -246,97 +266,45 @@
   }
   @media (max-width: 640px){ .contact-seal{ display:none; } }
 
+  /* Cyber Terminal Styles */
+  #terminalModal{
+    display:none; position:fixed; bottom:20px; right:20px; width:min(580px, 92vw); height:460px;
+    background:#080A0F; border:2px solid var(--red); border-radius:8px; z-index:60;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(255,71,87,0.25);
+    flex-direction:column; overflow:hidden; font-family:'Courier Prime', monospace;
+  }
+  #terminalModal.active{ display:flex; animation: popUp .3s ease-out; }
+  @keyframes popUp{ from{ opacity:0; transform: translateY(20px) scale(0.96); } to{ opacity:1; transform: translateY(0) scale(1); } }
+  .term-header{
+    background:#121620; border-bottom:1px solid #262B34; padding:8px 12px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .term-body{
+    flex:1; padding:12px; overflow-y:auto; color:#C4C9D4; font-size:0.8rem; line-height:1.45;
+  }
+  .term-prompt{ color:#2ED573; font-weight:bold; }
+  .term-input{
+    background:transparent; border:none; outline:none; color:#ECE5D4; font-family:'Courier Prime', monospace;
+    font-size:0.8rem; width:100%; flex:1;
+  }
+
+  /* Tactical Toast Notification */
+  #tacticalToast{
+    position:fixed; bottom:24px; left:24px; z-index:70; transform: translateY(100px); opacity:0;
+    transition: all .3s cubic-bezier(.2,.8,.2,1); pointer-events:none;
+    background:var(--card); border:1.5px solid var(--green); color:var(--ink);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  #tacticalToast.show{ transform: translateY(0); opacity:1; }
+
   body:not(.light-mode) h1{ text-shadow: 0 0 34px rgba(255,71,87,0.18); }
   body:not(.light-mode) #contact a[href^="mailto"]{ box-shadow: 0 0 20px rgba(255,71,87,0.25); }
   body:not(.light-mode) .watermark{ color:var(--red); opacity:0.05; }
-
-  /* Interactive Write-up Accordion */
-  .writeup-item{ border:1px solid var(--line); background:var(--card); transition:border-color .2s ease; }
-  .writeup-item:hover{ border-color:var(--red); }
-  .writeup-header{ cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:0.9rem 1.2rem; }
-  .writeup-content{ max-height:0; overflow:hidden; transition:max-height .35s cubic-bezier(0,1,0,1); background:var(--paper-2); }
-  .writeup-item.active .writeup-content{ max-height:1000px; transition:max-height .45s ease-in-out; border-top:1px dashed var(--line); }
-  .writeup-icon{ transition:transform .3s ease; }
-  .writeup-item.active .writeup-icon{ transform:rotate(90deg); color:var(--red); }
-
-  /* Toast Notification */
-  #tacticalToast{
-    position:fixed; bottom:24px; right:24px; z-index:999;
-    padding:0.75rem 1.25rem; font-family:'Courier Prime', monospace; font-size:0.8rem;
-    background:var(--card); border:1.5px solid var(--red); color:var(--ink);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(255,71,87,0.3);
-    opacity:0; transform:translateY(20px); pointer-events:none;
-    transition: opacity .3s ease, transform .3s ease;
-  }
-  #tacticalToast.show{ opacity:1; transform:translateY(0); pointer-events:auto; }
-
-  /* Interactive Terminal Modal */
-  #termModal{
-    position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);
-    display:none; align-items:center; justify-content:center; padding:1rem;
-  }
-  #termModal.open{ display:flex; animation: fadeIn .2s ease; }
-  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
-  .terminal-box{
-    width:100%; max-width:760px; height:480px; max-height:85vh;
-    background:#0D1117; border:1.5px solid #30363D; border-radius:6px;
-    box-shadow:0 0 40px rgba(0,0,0,0.9), 0 0 20px rgba(90,169,230,0.15);
-    display:flex; flex-direction:column; overflow:hidden; font-family:'Fira Code', 'Courier Prime', monospace;
-  }
-  .terminal-header{
-    background:#161B22; border-bottom:1px solid #30363D; padding:0.5rem 0.8rem;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .terminal-body{
-    flex:1; padding:1rem; overflow-y:auto; color:#C9D1D9; font-size:0.82rem; line-height:1.45;
-  }
-  .term-prompt{ color:#58A6FF; font-weight:700; margin-right:0.4rem; }
-  .term-input{
-    background:transparent; border:none; outline:none; color:#7EE787; font-family:inherit;
-    font-size:inherit; width:100%; flex:1;
-  }
-  .term-btn{
-    width:12px; height:12px; border-radius:9999px; display:inline-block; margin-right:4px;
-  }
 </style>
 </head>
 <body class="antialiased">
 <canvas id="dustCanvas" aria-hidden="true"></canvas>
 <div id="spotlight"></div>
-
-<!-- Tactical Toast -->
-<div id="tacticalToast">
-  <span id="toastMsg">[SYSTEM: COPIED TO CLIPBOARD // TLP:CLEAR]</span>
-</div>
-
-<!-- Interactive CLI Terminal Modal -->
-<div id="termModal" role="dialog" aria-modal="true" aria-label="Interactive Shell">
-  <div class="terminal-box">
-    <div class="terminal-header">
-      <div class="flex items-center gap-1.5">
-        <span class="term-btn" style="background:#FF5F56;"></span>
-        <span class="term-btn" style="background:#FFBD2E;"></span>
-        <span class="term-btn" style="background:#27C93F;"></span>
-        <span class="text-xs text-gray-400 ml-2">kareem@offsec-shell: ~/dossier</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="text-[0.65rem] text-gray-400">Type 'help'</span>
-        <button id="closeTermBtn" class="text-gray-400 hover:text-white px-2 py-0.5 text-xs border border-gray-600 rounded">ESC / ✕</button>
-      </div>
-    </div>
-    <div class="terminal-body" id="termOutput">
-      <div class="text-gray-400 mb-2">============================================================</div>
-      <div class="text-[#58A6FF] font-bold">KAREEM TAMER // OFFSEC INTERACTIVE CASE TERMINAL v2.6</div>
-      <div class="text-gray-400 text-xs mb-3">TLP:CLEAR — Active Target: kareemtamer159.github.io</div>
-      <div class="text-[#8B949E] text-xs mb-3">Available commands: <span class="text-[#E3B341]">whoami, skills, tools, projects, exp, nmap, cv, clear, exit</span></div>
-      <div class="text-gray-400 mb-3">============================================================</div>
-    </div>
-    <div class="p-3 bg-[#161B22] border-t border-[#30363D] flex items-center">
-      <span class="term-prompt">kareem@sec:~$</span>
-      <input type="text" id="termInput" class="term-input" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. nmap, whoami)..." />
-    </div>
-  </div>
-</div>
 
 <!-- NAV -->
 <header class="sticky top-0 z-30" style="background:var(--paper); border-bottom:2px solid var(--ink);">
@@ -345,21 +313,18 @@
     <nav class="hidden lg:flex items-end gap-1 flex-wrap justify-end">
       <a href="#about" class="tab-link"><span class="lang-en">about</span><span class="lang-ar">نبذة</span></a>
       <a href="#experience" class="tab-link"><span class="lang-en">experience</span><span class="lang-ar">الخبرات</span></a>
-      <a href="#projects" class="tab-link"><span class="lang-en">arsenal</span><span class="lang-ar">المشاريع</span></a>
+      <a href="#projects" class="tab-link"><span class="lang-en">operations</span><span class="lang-ar">المشاريع</span></a>
       <a href="#certifications" class="tab-link"><span class="lang-en">credentials</span><span class="lang-ar">الشهادات</span></a>
       <a href="#labs" class="tab-link"><span class="lang-en">field notes</span><span class="lang-ar">ملاحظات ميدانية</span></a>
       <span class="nav-divider" aria-hidden="true"></span>
-      <button id="openTermNav" class="tab-link mono text-xs" style="color:var(--navy); border-color:var(--navy);" title="Open Interactive Terminal">&gt;_ CLI</button>
       <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="tab-link"><span class="lang-en">github</span><span class="lang-ar">GitHub</span></a>
+      <button id="termNavBtn" class="tab-link mono text-xs" style="color:var(--green);" title="Open Interactive Terminal">&gt;_ SHELL</button>
       <button id="langToggle" class="tab-link mono">EN / AR</button>
       <button id="modeToggle" class="tab-link mono" aria-label="Toggle dark/light mode">☀</button>
-      <a href="resume.pdf" download="Kareem_Tamer_CV.pdf" class="tab-link mono font-bold" style="border-color:var(--gold); color:var(--gold); background:rgba(227,179,65,0.06);" title="Download Dossier PDF">
-        <span class="lang-en">↓ CV</span><span class="lang-ar">↓ السيرة</span>
-      </a>
-      <a href="#contact" class="tab-link" style="background:var(--red); color:var(--paper); border-color:var(--red); font-weight:700;"><span class="lang-en">open case</span><span class="lang-ar">تواصل</span></a>
+      <a href="#contact" class="tab-link" style="background:var(--red); color:var(--paper); border-color:var(--red);"><span class="lang-en">open case</span><span class="lang-ar">تواصل</span></a>
     </nav>
     <div class="flex lg:hidden items-center gap-1.5 sm:gap-2 pb-3">
-      <button id="openTermMobile" class="mono text-xs rounded px-2 py-1.5 border" style="border-color:var(--navy); color:var(--navy);">&gt;_</button>
+      <button id="termNavBtnMobile" class="mono text-xs rounded px-2 py-1.5 border" style="border-color:var(--green); color:var(--green);">&gt;_</button>
       <button id="langToggleMobile" class="mono text-xs rounded px-2 py-1.5 border" style="border-color:var(--line);">EN/AR</button>
       <button id="modeToggleMobile" class="mono text-xs rounded px-2 py-1.5 border" style="border-color:var(--line);" aria-label="Toggle dark/light mode">☀</button>
       <a href="#contact" class="mono text-xs rounded px-2 py-1.5" style="background:var(--red); color:var(--paper);"><span class="lang-en">contact</span><span class="lang-ar">تواصل</span></a>
@@ -370,11 +335,12 @@
     <nav class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1 mono text-sm">
       <a href="#about" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">about</span><span class="lang-ar">نبذة</span></a>
       <a href="#experience" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">experience</span><span class="lang-ar">الخبرات</span></a>
-      <a href="#projects" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">arsenal &amp; projects</span><span class="lang-ar">المشاريع التكتيكية</span></a>
+      <a href="#projects" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">operations &amp; tools</span><span class="lang-ar">المشاريع والأدوات</span></a>
       <a href="#certifications" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">credentials</span><span class="lang-ar">الشهادات</span></a>
       <a href="#labs" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">field notes</span><span class="lang-ar">ملاحظات ميدانية</span></a>
-      <a href="resume.pdf" download="Kareem_Tamer_CV.pdf" class="py-2 border-b" style="border-color:var(--line); color:var(--gold);"><span class="lang-en">↓ Download CV (PDF)</span><span class="lang-ar">↓ تحميل السيرة الذاتية</span></a>
-      <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="py-2"><span class="lang-en">github</span><span class="lang-ar">GitHub</span></a>
+      <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="py-2 border-b" style="border-color:var(--line);"><span class="lang-en">github</span><span class="lang-ar">GitHub</span></a>
+      <!-- DIRECT MOBILE CV DOWNLOAD LINK -->
+      <a href="./Kareem_Tamer_CV.pdf" download="Kareem_Tamer_CV.pdf" target="_blank" class="py-2" style="color:var(--red);"><span class="lang-en">📄 Download Official CV (PDF)</span><span class="lang-ar">📄 تحميل السيرة الذاتية (PDF)</span></a>
     </nav>
   </div>
 </header>
@@ -395,12 +361,12 @@
       <div class="open-badge reveal in-view">
         <span class="open-dot"></span>
         <span class="stamp text-xs">
-          <span class="lang-en">OPEN FOR OFFSEC ROLES &amp; INTERNSHIPS</span>
-          <span class="lang-ar">متاح لوظائف وتدريبات الأمن الهجومي</span>
+          <span class="lang-en">OPEN FOR WORK &amp; INTERNSHIPS</span>
+          <span class="lang-ar">متاح للعمل والتدريب</span>
         </span>
       </div>
-      <button id="heroTermTrigger" class="highlight-chip cursor-pointer hover:border-red-500 transition-colors">
-        <span class="mono text-xs" style="color:var(--navy);">&gt;_ LAUNCH TACTICAL SHELL</span>
+      <button id="quickTerminalBtn" class="highlight-chip mono text-xs hover:border-red-500 cursor-pointer transition-colors" style="border-color:var(--line);">
+        <span style="color:var(--green);">&gt;_</span> <span class="lang-en">LAUNCH KT-SHELL</span><span class="lang-ar">تشغيل الطرفية التفاعلية</span>
       </button>
     </div>
 
@@ -420,42 +386,43 @@
         </p>
 
         <p class="mt-6 text-base leading-relaxed max-w-lg" style="color:var(--ink);">
-          <span class="lang-en">Senior cybersecurity student leveraging a software development background to approach vulnerability assessment with an <span class="redact" tabindex="0" data-scramble="true">attacker's mindset</span>. Hunting and exploiting <span class="redact" tabindex="0" data-scramble="true">SQLi, XSS, IDOR, SSRF &amp; CSRF</span> with Burp Suite, Nmap, Metasploit and custom Python tooling.</span>
-          <span class="lang-ar">طالب أمن سيبراني في السنة الأخيرة، بستفيد من خلفيتي في الـ development عشان أقيّم الثغرات بـ<span class="redact" tabindex="0" data-scramble="true">عقلية مهاجم</span>. بدوّر على واستغل ثغرات زي <span class="redact" tabindex="0" data-scramble="true">SQLi وXSS وIDOR وSSRF وCSRF</span> باستخدام Burp Suite وNmap وMetasploit وأدوات Python بعملها بنفسي.</span>
+          <span class="lang-en">Senior cybersecurity student leveraging a software development background to approach vulnerability assessment with an <span class="redact" tabindex="0">attacker's mindset</span>. Hunting and exploiting <span class="redact" tabindex="0">SQLi, XSS, IDOR, SSRF &amp; CSRF</span> with Burp Suite, Nmap, Metasploit and custom Python tooling.</span>
+          <span class="lang-ar">طالب أمن سيبراني في السنة الأخيرة، بستفيد من خلفيتي في الـ development عشان أقيّم الثغرات بـ<span class="redact" tabindex="0">عقلية مهاجم</span>. بدوّر على واستغل ثغرات زي <span class="redact" tabindex="0">SQLi وXSS وIDOR وSSRF وCSRF</span> باستخدام Burp Suite وNmap وMetasploit وأدوات Python بعملها بنفسي.</span>
         </p>
         <p class="mt-3 text-xs italic" style="color:var(--ink-soft);">
           <span class="lang-en">(tap the redacted lines to declassify &amp; unscramble)</span>
-          <span class="lang-ar">(دوس على السطور المشطوبة لفك التشفير وإظهارها)</span>
+          <span class="lang-ar">(دوس على السطور المشطوبة عشان تفك التشفير لمدة دقيقة)</span>
         </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#contact" class="stamp inline-flex items-center gap-2 px-5 py-3 text-sm border-2" style="border-color:var(--ink); background:var(--ink); color:var(--paper);">
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="#contact" class="stamp inline-flex items-center gap-2 px-6 py-3 text-sm border-2" style="border-color:var(--ink); background:var(--ink); color:var(--paper);">
             <span class="lang-en">Open a case with me</span>
             <span class="lang-ar">ابعتلي التفاصيل</span>
           </a>
-          <a href="resume.pdf" download="Kareem_Tamer_CV.pdf" class="stamp inline-flex items-center gap-2 px-5 py-3 text-sm border-2 underline-hover" style="border-color:var(--gold); color:var(--gold); background:rgba(227,179,65,0.06);">
-            <span>↓</span>
-            <span class="lang-en">Download Dossier (CV)</span>
+          <!-- DIRECT CV DOWNLOAD BUTTON LINKED TO Kareem_Tamer_CV.pdf -->
+          <a href="./Kareem_Tamer_CV.pdf" download="Kareem_Tamer_CV.pdf" target="_blank" class="stamp inline-flex items-center gap-2 px-5 py-3 text-sm border-2 cursor-pointer" style="border-color:var(--red); color:var(--red); background:rgba(255,71,87,0.06);">
+            <span>⬇</span>
+            <span class="lang-en">Export Dossier (CV)</span>
             <span class="lang-ar">تحميل السيرة الذاتية (CV)</span>
           </a>
-          <a href="#projects" class="stamp inline-flex items-center gap-2 px-5 py-3 text-sm border-2 underline-hover" style="border-color:var(--navy); color:var(--navy);">
-            <span class="lang-en">Explore Arsenal</span>
+          <a href="#projects" class="stamp inline-flex items-center gap-2 px-5 py-3 text-sm border-2 underline-hover" style="border-color:var(--ink); color:var(--ink);">
+            <span class="lang-en">View Operations</span>
             <span class="lang-ar">استعراض المشاريع</span>
           </a>
         </div>
 
         <div class="mt-10 grid grid-cols-3 gap-4 max-w-sm">
           <div>
-            <p class="text-2xl font-bold" style="color:var(--ink);">7+</p>
-            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">credentials on file</span><span class="lang-ar">شهادات وتدريبات</span></p>
+            <p class="text-2xl font-bold">2</p>
+            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">credentials on file</span><span class="lang-ar">شهادات موثقة</span></p>
           </div>
           <div>
-            <p class="text-2xl font-bold" style="color:var(--navy);">3</p>
-            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">security internships</span><span class="lang-ar">تدريبات ميدانية</span></p>
+            <p class="text-2xl font-bold">2</p>
+            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">security internships</span><span class="lang-ar">تدريبات أمنية</span></p>
           </div>
           <div>
-            <p class="text-2xl font-bold" style="color:var(--red);">HTB · THM</p>
-            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">CPTS path active</span><span class="lang-ar">مسار CPTS نشط</span></p>
+            <p class="text-2xl font-bold">HTB · THM</p>
+            <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">CPTS path in progress</span><span class="lang-ar">مسار CPTS جاري</span></p>
           </div>
         </div>
       </div>
@@ -468,12 +435,12 @@
           </span>
         </div>
         <div class="dossier-card p-5 w-full max-w-xs">
-          <p class="mono text-xs mb-3" style="color:var(--ink-soft);">~/capabilities/threat-matrix</p>
+          <p class="mono text-xs mb-3" style="color:var(--ink-soft);">~/skills/top-listed</p>
           <ul class="space-y-1.5 text-sm">
-            <li class="flex items-center gap-2"><span style="color:var(--red);">⚡</span> Penetration Testing (Web &amp; Net)</li>
-            <li class="flex items-center gap-2"><span style="color:var(--navy);">⚡</span> Red Teaming &amp; Exploitation</li>
-            <li class="flex items-center gap-2"><span style="color:var(--gold);">⚡</span> Python Automation &amp; Scanners</li>
-            <li class="flex items-center gap-2"><span style="color:var(--green);">⚡</span> Secure Architecture &amp; Remediation</li>
+            <li>— Offensive Security &amp; PT</li>
+            <li>— Vulnerability Assessment</li>
+            <li>— Web App Security (OWASP Top 10)</li>
+            <li>— Python Custom Tooling</li>
           </ul>
         </div>
       </div>
@@ -483,19 +450,19 @@
 
 <!-- ABOUT -->
 <section id="about" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
-  <p class="mono text-xs mb-6" style="color:var(--ink-soft);">EXHIBIT A — <span class="lang-en">SUBJECT PROFILE &amp; CAPABILITY AUDIT</span><span class="lang-ar">ملف تعريفي وتقييم القدرات</span></p>
+  <p class="mono text-xs mb-6" style="color:var(--ink-soft);">EXHIBIT A — <span class="lang-en">SUBJECT PROFILE</span><span class="lang-ar">ملف تعريفي</span></p>
   <div class="grid md:grid-cols-3 gap-10">
     <div class="md:col-span-2 reveal">
       <p class="text-lg leading-relaxed">
-        <span class="lang-en">Senior Cybersecurity student at ECU and aspiring penetration tester passionate about offensive security, network security and red teaming. Backed by certified networking foundations (NVIDIA, Packet, Cisco), he approaches vulnerability assessment with an attacker's mindset to identify, exploit and remediate system weaknesses. He actively upskills through PortSwigger Web Security Academy and TryHackMe, and is currently completing the Certified Penetration Testing Specialist (CPTS) path on Hack The Box under Egypt's national initiatives.</span>
-        <span class="lang-ar">طالب سنة رابعة أمن سيبراني في الجامعة المصرية الصينية، ومختبر اختراق طموح شغوف بالـ offensive security وأمن الشبكات والـ red teaming. حاصل على أساسيات شبكات موثقة (NVIDIA, Packet, Cisco)، وبيتعامل مع تقييم الثغرات بعقلية مهاجم عشان يكتشف الثغرات ويستغلها ويصلّحها. بيطوّر نفسه باستمرار عن طريق PortSwigger Web Security Academy وTryHackMe، وحاليًا بيكمّل مسار Certified Penetration Testing Specialist (CPTS) على Hack The Box كجزء من المبادرات الوطنية.</span>
+        <span class="lang-en">Senior Cybersecurity student at ECU and aspiring penetration tester passionate about offensive security, network security and red teaming. Backed by certified networking foundations (NVIDIA, Packet), he approaches vulnerability assessment with an attacker's mindset to identify, exploit and remediate system weaknesses. He actively upskills through PortSwigger Web Security Academy and TryHackMe, and is currently completing the Certified Penetration Testing Specialist (CPTS) path on Hack The Box.</span>
+        <span class="lang-ar">طالب سنة رابعة أمن سيبراني في الجامعة المصرية الصينية، ومختبر اختراق طموح شغوف بالـ offensive security وأمن الشبكات والـ red teaming. حاصل على أساسيات شبكات موثقة (NVIDIA, Packet)، وبيتعامل مع تقييم الثغرات بعقلية مهاجم عشان يكتشف الثغرات ويستغلها ويصلّحها. بيطوّر نفسه باستمرار عن طريق PortSwigger Web Security Academy وTryHackMe، وحاليًا بيكمّل مسار Certified Penetration Testing Specialist (CPTS) على Hack The Box.</span>
       </p>
       <div class="mt-4 flex flex-wrap gap-2">
         <span class="highlight-chip">Offensive Security</span>
         <span class="highlight-chip"><span class="lang-en">Web &amp; Network Exploitation</span><span class="lang-ar">استغلال الويب والشبكات</span></span>
         <span class="highlight-chip"><span class="lang-en">Red Teaming</span><span class="lang-ar">Red Teaming</span></span>
-        <span class="highlight-chip">CPTS <span class="lang-en">path candidate</span><span class="lang-ar">مرشح CPTS</span></span>
-        <span class="highlight-chip">Python Automation</span>
+        <span class="highlight-chip">CPTS <span class="lang-en">path</span><span class="lang-ar">مسار</span></span>
+        <span class="highlight-chip">PortSwigger Labs</span>
       </div>
     </div>
     <div class="dossier-card p-5 reveal" style="transition-delay:.1s;">
@@ -511,24 +478,24 @@
     <p class="mono text-xs mb-4" style="color:var(--ink-soft);">THREAT COMPETENCY METER</p>
     <div class="space-y-4">
       <div>
-        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Penetration Testing (OWASP Top 10 &amp; Manual Testing)</span><span class="lang-ar">اختبار الاختراق (OWASP Top 10 والفحص اليدوي)</span></span><span class="mono text-xs" style="color:var(--red);">CRITICAL // 95%</span></div>
-        <div class="meter-track" data-percent="95"><div class="meter-fill" style="background:var(--red);"></div></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Penetration Testing &amp; Vulnerability Assessment</span><span class="lang-ar">اختبار الاختراق وتقييم الثغرات</span></span><span class="mono text-xs" style="color:var(--red);">CRITICAL</span></div>
+        <div class="meter-track" data-percent="92"><div class="meter-fill" style="background:var(--red);"></div></div>
       </div>
       <div>
-        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Offensive Security &amp; Red Teaming</span><span class="lang-ar">الأمن الهجومي وRed Teaming</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH // 88%</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Web Exploitation (SQLi · XSS · IDOR · SSRF · CSRF)</span><span class="lang-ar">استغلال الويب (SQLi · XSS · IDOR · SSRF · CSRF)</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
         <div class="meter-track" data-percent="88"><div class="meter-fill" style="background:var(--navy);"></div></div>
       </div>
       <div>
-        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Web Exploitation (SQLi · XSS · IDOR · SSRF · CSRF)</span><span class="lang-ar">استغلال الويب (SQLi · XSS · IDOR · SSRF · CSRF)</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH // 85%</span></div>
-        <div class="meter-track" data-percent="85"><div class="meter-fill" style="background:var(--navy);"></div></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Network Security &amp; Packet Inspection (Wireshark · Nmap)</span><span class="lang-ar">أمن الشبكات وفحص الحزم (Wireshark · Nmap)</span></span><span class="mono text-xs" style="color:var(--navy);">HIGH</span></div>
+        <div class="meter-track" data-percent="82"><div class="meter-fill" style="background:var(--navy);"></div></div>
       </div>
       <div>
-        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Network Security, Protocol Auditing &amp; Wireshark</span><span class="lang-ar">أمن الشبكات والبروتوكولات وتحليل الحزم</span></span><span class="mono text-xs" style="color:var(--gold);">SOLID // 78%</span></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Security Tooling (Burp Suite Pro · Metasploit · Python)</span><span class="lang-ar">أدوات الفحص والاستغلال (Burp Suite · Metasploit · Python)</span></span><span class="mono text-xs" style="color:var(--gold);">MODERATE-HIGH</span></div>
         <div class="meter-track" data-percent="78"><div class="meter-fill" style="background:var(--gold);"></div></div>
       </div>
       <div>
-        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span>Burp Suite Pro · Nmap · Metasploit · Custom Python Tooling</span><span class="mono text-xs" style="color:var(--green);">PRACTITIONER // 82%</span></div>
-        <div class="meter-track" data-percent="82"><div class="meter-fill" style="background:var(--green);"></div></div>
+        <div class="flex flex-wrap gap-x-2 justify-between text-sm mb-1"><span><span class="lang-en">Defensive Controls &amp; Remediation Guidance</span><span class="lang-ar">الحلول الدفاعية وتوصيات الترقيع</span></span><span class="mono text-xs" style="color:var(--green);">SECURE</span></div>
+        <div class="meter-track" data-percent="75"><div class="meter-fill" style="background:var(--green);"></div></div>
       </div>
     </div>
   </div>
@@ -536,7 +503,7 @@
 
 <!-- EXPERIENCE -->
 <section id="experience" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
-  <p class="mono text-xs mb-8" style="color:var(--ink-soft);">EXHIBIT B — <span class="lang-en">TIMELINE OF ENGAGEMENTS &amp; INTERNSHIPS</span><span class="lang-ar">سجل التدريبات والمهام العملية</span></p>
+  <p class="mono text-xs mb-8" style="color:var(--ink-soft);">EXHIBIT B — <span class="lang-en">TIMELINE OF ENGAGEMENTS</span><span class="lang-ar">سجل التدريبات</span></p>
   <div class="space-y-8">
 
     <div class="folder-tab reveal">
@@ -545,16 +512,16 @@
         <div class="mono text-xs" style="color:var(--ink-soft);"><span class="lang-en">Jul 2026 — present</span><span class="lang-ar">يوليو 2026 — حتى الآن</span></div>
         <div class="md:col-span-3">
           <h3 class="text-lg font-bold"><span class="lang-en">Penetration Tester</span><span class="lang-ar">مختبر اختراق</span></h3>
-          <p class="text-sm mt-1" style="color:var(--navy); font-weight:700;"><span class="lang-en">Digital Egypt Pioneers Initiative (DEPI) · Offensive Security Track · Cairo</span><span class="lang-ar">مبادرة رواد مصر الرقمية (DEPI) · مسار الأمن الهجومي · القاهرة</span></p>
+          <p class="text-sm mt-1" style="color:var(--ink-soft);"><span class="lang-en">Digital Egypt Pioneers Initiative (DEPI) · Internship · Cairo</span><span class="lang-ar">مبادرة رواد مصر الرقمية (DEPI) · تدريب · القاهرة</span></p>
           <p class="text-sm mt-3 leading-relaxed">
-            <span class="lang-en">Performing structured penetration testing under Egypt's premier national digital talent initiative. Executing deep vulnerability scanning, manual exploitation, and comprehensive remediation reporting utilizing Nmap, Burp Suite, Metasploit, and custom Python scripts. Pursuing HTB CPTS certification.</span>
-            <span class="lang-ar">أجري اختبارات اختراق منهجية ضمن مبادرة رواد مصر الرقمية التابعة لوزارة الاتصالات. فحص ثغرات متقدم، استغلال يدوي دقيق، وصياغة تقارير ترقيع احترافية باستخدام Nmap وBurp Suite وMetasploit وسكريبتات بايثون مخصصة، والتحضير لمسار شهادة HTB CPTS.</span>
+            <span class="lang-en">Performing penetration testing under Egypt's national digital talent initiative — vulnerability scanning, exploitation and reporting using Nmap, Burp Suite, Metasploit and custom Python scripts.</span>
+            <span class="lang-ar">بأجري اختبارات اختراق كجزء من مبادرة مصر الرقمية الوطنية للمواهب — فحص واستغلال ثغرات وإعداد تقارير باستخدام Nmap وBurp Suite وMetasploit وسكريبتات Python بعملها بنفسي.</span>
           </p>
           <ul class="mt-4 grid sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Target reconnaissance &amp; attack surface mapping</span><span class="lang-ar">استطلاع الأهداف وتحديد مساحة الهجوم</span></span></li>
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Manual Web App assessment (Burp Suite Pro)</span><span class="lang-ar">تقييم يدوي لتطبيقات الويب بـ Burp Suite</span></span></li>
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Hunting SQLi, XSS, IDOR, SSRF &amp; CSRF</span><span class="lang-ar">صيد ثغرات SQLi وXSS وIDOR وSSRF وCSRF</span></span></li>
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Automated exploit delivery via custom Python</span><span class="lang-ar">أتمتة سيناريوهات الاستغلال عبر بايثون</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Recon &amp; scanning with Nmap</span><span class="lang-ar">استطلاع وفحص باستخدام Nmap</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Manual exploitation via Burp Suite</span><span class="lang-ar">استغلال يدوي باستخدام Burp Suite</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Hunting SQLi, XSS, IDOR, SSRF &amp; CSRF</span><span class="lang-ar">اكتشاف SQLi وXSS وIDOR وSSRF وCSRF</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Custom Python exploitation scripts</span><span class="lang-ar">سكريبتات Python مخصصة للاستغلال</span></span></li>
           </ul>
         </div>
       </div>
@@ -565,15 +532,15 @@
       <div class="dossier-card p-5 pt-7 grid md:grid-cols-4 gap-4">
         <div class="mono text-xs" style="color:var(--ink-soft);"><span class="lang-en">Aug — Sep 2026</span><span class="lang-ar">أغسطس — سبتمبر 2026</span></div>
         <div class="md:col-span-3">
-          <h3 class="text-lg font-bold"><span class="lang-en">Penetration Tester — OffSec &amp; SOC Trainee</span><span class="lang-ar">مختبر اختراق — متدرب أمن هجومي وSOC</span></h3>
-          <p class="text-sm mt-1" style="color:var(--navy); font-weight:700;"><span class="lang-en">MCDR — Misr for Central Clearing, Depository and Registry / EGX · Cairo</span><span class="lang-ar">شركة مصر للمقاصة والإيداع والقيد المركزي (MCDR) والبورصة · القاهرة</span></p>
+          <h3 class="text-lg font-bold"><span class="lang-en">Penetration Tester — OffSec Trainee</span><span class="lang-ar">مختبر اختراق — متدرب OffSec</span></h3>
+          <p class="text-sm mt-1" style="color:var(--ink-soft);"><span class="lang-en">MCDR — Misr for Central Clearing, Depository and Registry · Internship · Cairo</span><span class="lang-ar">مصر للمقاصة والإيداع المركزي (MCDR) · تدريب · القاهرة</span></p>
           <p class="text-sm mt-3 leading-relaxed">
-            <span class="lang-en">Hardened practical offensive and defensive capabilities within high-security critical financial infrastructure. Analyzed traffic, assessed enterprise endpoints, and conducted controlled penetration assessments aligned with strict regulatory standards.</span>
-            <span class="lang-ar">تطبيق عملي لاختبارات الاختراق والتحليل الأمني داخل بيئة البنية التحتية المالية الحساسة. مراقبة حركة الشبكات، فحص نقاط النهاية، وتطبيق منهجيات الهجوم الأخلاقي وفقاً لمعايير المؤسسات المالية المنظمة.</span>
+            <span class="lang-en">Expanding practical offensive security expertise within a financial infrastructure environment as an OffSec trainee.</span>
+            <span class="lang-ar">بأوسّع خبرتي العملية في الأمن الهجومي جوه بيئة بنية تحتية مالية كمتدرب OffSec.</span>
           </p>
           <ul class="mt-4 grid sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Financial network traffic analysis</span><span class="lang-ar">تحليل حركة الشبكات والبروتوكولات المالية</span></span></li>
-            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">OffSec methodology in regulated environments</span><span class="lang-ar">تطبيق منهجيات الاختراق في بيئات مصرفية</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Network security monitoring</span><span class="lang-ar">مراقبة أمن الشبكات</span></span></li>
+            <li class="flex gap-2"><span style="color:var(--red);">▸</span><span><span class="lang-en">Applying offensive methodology in a regulated environment</span><span class="lang-ar">تطبيق منهجية هجومية جوه بيئة منظّمة</span></span></li>
           </ul>
         </div>
       </div>
@@ -585,10 +552,10 @@
         <div class="mono text-xs" style="color:var(--ink-soft);"><span class="lang-en">Sep 2025</span><span class="lang-ar">سبتمبر 2025</span></div>
         <div class="md:col-span-3">
           <h3 class="text-lg font-bold"><span class="lang-en">Summer Intern — "The Green Leap"</span><span class="lang-ar">متدرب صيفي — برنامج "The Green Leap"</span></h3>
-          <p class="text-sm mt-1" style="color:var(--navy); font-weight:700;"><span class="lang-en">CIB Egypt · Summer Internship Program · Cairo</span><span class="lang-ar">البنك التجاري الدولي (CIB) · برنامج التدريب الصيفي · القاهرة</span></p>
+          <p class="text-sm mt-1" style="color:var(--ink-soft);"><span class="lang-en">CIB Egypt · Summer Internship Program · Cairo</span><span class="lang-ar">البنك التجاري الدولي (CIB) · برنامج التدريب الصيفي · القاهرة</span></p>
           <p class="text-sm mt-3 leading-relaxed">
-            <span class="lang-en">Completed CIB's flagship summer internship program, covering enterprise operations, financial technology resilience, and workplace governance alongside partners including IFC, Frankfurt School of Finance &amp; Management, and LinkedIn Learning.</span>
-            <span class="lang-ar">إتمام برنامج التدريب الصيفي المعتمد لدى البنك التجاري الدولي، شمل استكشاف العمليات المصرفية الرقمية وحوكمة بيئات العمل بالتعاون مع IFC ومدرسة فرانكفورت للإدارة والتمويل.</span>
+            <span class="lang-en">Completed CIB's flagship summer internship program, covering professional and workplace skills alongside partners including the IFC, Frankfurt School of Finance &amp; Management and LinkedIn Learning.</span>
+            <span class="lang-ar">أكملت برنامج CIB الصيفي الرئيسي، وغطّى مهارات مهنية وسوق عمل بالتعاون مع جهات زي IFC وFrankfurt School of Finance &amp; Management وLinkedIn Learning.</span>
           </p>
         </div>
       </div>
@@ -597,13 +564,13 @@
     <div class="folder-tab reveal" style="transition-delay:.2s;">
       <span class="tab-label">LOG 000</span>
       <div class="dossier-card p-5 pt-7 grid md:grid-cols-4 gap-4">
-        <div class="mono text-xs" style="color:var(--ink-soft);"><span class="lang-en">Oct 2023 — Jun 2027</span><span class="lang-ar">أكتوبر 2023 — يونيو 2027</span></div>
+        <div class="mono text-xs" style="color:var(--ink-soft);"><span class="lang-en">Oct 2023 — present</span><span class="lang-ar">أكتوبر 2023 — حتى الآن</span></div>
         <div class="md:col-span-3">
-          <h3 class="text-lg font-bold"><span class="lang-en">B.Sc. Cyber Security</span><span class="lang-ar">بكالوريوس الأمن السيبراني</span></h3>
-          <p class="text-sm mt-1" style="color:var(--navy); font-weight:700;"><span class="lang-en">Egyptian Chinese University (ECU) · Cairo</span><span class="lang-ar">الجامعة المصرية الصينية (ECU) · القاهرة</span></p>
+          <h3 class="text-lg font-bold"><span class="lang-en">B.Sc. Cyber Security</span><span class="lang-ar">بكالوريوس أمن سيبراني</span></h3>
+          <p class="text-sm mt-1" style="color:var(--ink-soft);"><span class="lang-en">Egyptian Chinese University (ECU) · Cairo</span><span class="lang-ar">الجامعة المصرية الصينية (ECU) · القاهرة</span></p>
           <p class="text-sm mt-3 leading-relaxed">
-            <span class="lang-en">Final senior year (Class of 2027). Core curriculum includes Cryptography, Network Defense, Penetration Testing, Operating Systems Internals, and Software Security Engineering.</span>
-            <span class="lang-ar">طالب بالسنة النهائية. دراسة متقدمة في التشفير، أمن الشبكات، اختبار الاختراق، النظم الموزعة وهندسة البرمجيات الآمنة.</span>
+            <span class="lang-en">Senior year, expected graduation July 2027 — building the theoretical foundation alongside hands-on offensive security practice.</span>
+            <span class="lang-ar">في السنة الأخيرة، متوقع التخرج يوليو 2027 — بيبني الأساس النظري جنب التدريب العملي في الأمن الهجومي.</span>
           </p>
         </div>
       </div>
@@ -612,15 +579,16 @@
   </div>
 </section>
 
-<!-- PROJECTS / ARSENAL -->
+<!-- PROJECTS & OPERATIONS SECTION -->
 <section id="projects" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
   <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
     <div>
-      <p class="mono text-xs" style="color:var(--ink-soft);">EXHIBIT C — <span class="lang-en">TACTICAL ARSENAL &amp; OFFENSIVE CODE</span><span class="lang-ar">ترسانة المشاريع والأدوات الهجومية</span></p>
-      <h2 class="text-2xl font-bold mt-1"><span class="lang-en">Classified Tooling &amp; Proof-of-Work</span><span class="lang-ar">المشاريع والأدوات التطويرية</span></h2>
+      <p class="mono text-xs" style="color:var(--ink-soft);">EXHIBIT C — <span class="lang-en">CLASSIFIED OPERATIONS &amp; WEAPONRY</span><span class="lang-ar">ترسانة المشاريع والأدوات الهجومية</span></p>
+      <h2 class="text-2xl font-bold mt-1"><span class="lang-en">Proof of Work &amp; Security Engineering</span><span class="lang-ar">الأعمال التطبيقية وهندسة الأمن</span></h2>
     </div>
-    <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="highlight-chip hover:border-red-500">
-      <span>GitHub Profile ↗</span>
+    <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs underline-hover" style="color:var(--red);">
+      <span class="lang-en">Browse GitHub Repositories ↗</span>
+      <span class="lang-ar">استعراض مستودعات GitHub ↗</span>
     </a>
   </div>
 
@@ -630,24 +598,26 @@
     <div class="dossier-card p-6 reveal flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between gap-2 mb-3">
-          <span class="mono text-xs px-2 py-0.5 rounded" style="background:rgba(255,71,87,0.12); color:var(--red);">OFFENSIVE / DEFENSIVE SIM</span>
-          <span class="mono text-xs" style="color:var(--ink-soft);">PY // GUI</span>
+          <span class="badge-tag">OP: SIMULATOR</span>
+          <span class="mono text-xs" style="color:var(--red);">TLP:AMBER</span>
         </div>
-        <h3 class="text-lg font-bold mb-2">Network Attack &amp; Defense Simulator</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--ink-soft);">
-          <span class="lang-en">A custom desktop security simulator built with Python and CustomTkinter. Simulates live Layer-2/4 network attack vectors including ARP Cache Poisoning, SYN Flooding, and Port Sweeping, while illustrating defensive telemetry, packet drops, and IDS alert logs.</span>
-          <span class="lang-ar">برنامج محاكاة سطح مكتب متقدم مبني بـ Python وCustomTkinter. يحاكي هجمات الشبكات في الطبقة الثانية والرابعة مثل ARP Cache Poisoning وSYN Flooding وفحص المنافذ، مع محاكاة الاستجابة الدفاعية وكتابة سجلات الـ IDS.</span>
+        <h3 class="text-lg font-bold"><span class="lang-en">Network Attack &amp; Defense Simulator</span><span class="lang-ar">محاكي الهجمات والدفاع الشبكي</span></h3>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--ink-soft);">
+          <span class="lang-en">A Python-based simulation engine built with CustomTkinter to model network attack vectors (ARP Spoofing, SYN floods, Port Enumeration) and demonstrate automated defensive detection with packet logging.</span>
+          <span class="lang-ar">تطبيق بايثون متكامل بواجهة تفاعلية (CustomTkinter) لمحاكاة سيناريوهات الهجمات الشبكية (ARP Spoofing, SYN Floods, Port Scanning) مع تطبيق آليات الكشف والدفاع وتوثيق سجلات الحزم.</span>
         </p>
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="highlight-chip text-[0.68rem]">Python</span>
-          <span class="highlight-chip text-[0.68rem]">CustomTkinter</span>
-          <span class="highlight-chip text-[0.68rem]">Scapy / Sockets</span>
-          <span class="highlight-chip text-[0.68rem]">Network Security</span>
+          <span class="highlight-chip">Python</span>
+          <span class="highlight-chip">CustomTkinter</span>
+          <span class="highlight-chip">Network Protocols</span>
+          <span class="highlight-chip">Defense Automation</span>
         </div>
       </div>
       <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color:var(--line);">
-        <span class="mono text-xs" style="color:var(--gold);">STATUS: OPERATIONAL</span>
-        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs hover:text-red-400">View Source ↗</a>
+        <span class="mono text-xs" style="color:var(--ink-soft);">STATUS: ACTIVE / TESTED</span>
+        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs font-bold" style="color:var(--navy);">
+          <span class="lang-en">View Source ↗</span><span class="lang-ar">الكود المصدري ↗</span>
+        </a>
       </div>
     </div>
 
@@ -655,75 +625,80 @@
     <div class="dossier-card p-6 reveal flex flex-col justify-between" style="transition-delay:.08s;">
       <div>
         <div class="flex items-center justify-between gap-2 mb-3">
-          <span class="mono text-xs px-2 py-0.5 rounded" style="background:rgba(90,169,230,0.12); color:var(--navy);">EXPLOITATION &amp; RECON</span>
-          <span class="mono text-xs" style="color:var(--ink-soft);">CLI TOOLING</span>
+          <span class="badge-tag">OP: RECON-TOOL</span>
+          <span class="mono text-xs" style="color:var(--green);">TLP:CLEAR</span>
         </div>
-        <h3 class="text-lg font-bold mb-2">Custom Pentest Automation Scripts</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--ink-soft);">
-          <span class="lang-en">Modular Python scripts engineered for offensive security assessments: automated Nmap XML output parsing, multi-threaded IDOR endpoint parameter fuzzing, and boolean-based blind SQLi character extractors with tamper bypass headers.</span>
-          <span class="lang-ar">مجموعة سكريبتات بايثون مخصصة لأتمتة مراحل اختبار الاختراق: استخلاص ومعالجة بيانات Nmap XML، فحص معاملات IDOR بشكل متوازي وسريع، واستخراج بيانات Blind SQLi آلياً مع تجاوز قيود الحماية البسيطة.</span>
+        <h3 class="text-lg font-bold"><span class="lang-en">Automated Web Recon &amp; Vulnerability Scanner</span><span class="lang-ar">أداة الاستطلاع وفحص ثغرات الويب المخصصة</span></h3>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--ink-soft);">
+          <span class="lang-en">Custom modular Python tooling automating the initial enumeration phase: discovers subdomains, probes open HTTP endpoints, tests for reflected parameters, and flags indicators for SQLi and XSS vulnerabilities.</span>
+          <span class="lang-ar">أداة أتمتة هجومية بلغة Python لمرحلة الاستطلاع الأولي: فحص النطاقات الفرعية، اكتشاف مسارات الويب، فحص المعاملات المصابة، وتوليد مؤشرات أولية لثغرات الـ SQLi وXSS.</span>
         </p>
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="highlight-chip text-[0.68rem]">Python 3</span>
-          <span class="highlight-chip text-[0.68rem]">Requests</span>
-          <span class="highlight-chip text-[0.68rem]">Asyncio / Threads</span>
-          <span class="highlight-chip text-[0.68rem]">Burp API</span>
+          <span class="highlight-chip">Python CLI</span>
+          <span class="highlight-chip">OWASP Top 10</span>
+          <span class="highlight-chip">Burp Suite API</span>
+          <span class="highlight-chip">Recon Automation</span>
         </div>
       </div>
       <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color:var(--line);">
-        <span class="mono text-xs" style="color:var(--navy);">ARSENAL: ACTIVE</span>
-        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs hover:text-red-400">View Repos ↗</a>
+        <span class="mono text-xs" style="color:var(--ink-soft);">STATUS: FIELD TOOLING</span>
+        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs font-bold" style="color:var(--navy);">
+          <span class="lang-en">View Source ↗</span><span class="lang-ar">الكود المصدري ↗</span>
+        </a>
       </div>
     </div>
 
     <!-- Project 3 -->
-    <div class="dossier-card p-6 reveal flex flex-col justify-between" style="transition-delay:.16s;">
+    <div class="dossier-card p-6 reveal flex flex-col justify-between" style="transition-delay:.14s;">
       <div>
         <div class="flex items-center justify-between gap-2 mb-3">
-          <span class="mono text-xs px-2 py-0.5 rounded" style="background:rgba(46,213,115,0.12); color:var(--green);">SECURE APP ARCHITECTURE</span>
-          <span class="mono text-xs" style="color:var(--ink-soft);">FULL-STACK</span>
+          <span class="badge-tag">OP: SECURE-ARCH</span>
+          <span class="mono text-xs" style="color:var(--gold);">TLP:GREEN</span>
         </div>
-        <h3 class="text-lg font-bold mb-2">MedConnect Healthcare Management System</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--ink-soft);">
-          <span class="lang-en">End-to-end pharmaceutical and clinic management system presented at the ECU Academic Conference. Architected with defensive coding principles: parameterized SQL queries, rigorous CSRF token checks, Role-Based Access Control (RBAC), and sanitization against XSS.</span>
-          <span class="lang-ar">نظام إدارة صيدلاني وطبي متكامل عُرض في مؤتمر الإرشاد الأكاديمي بالجامعة. صُمم وفق أسس البرمجة الآمنة: الاستعلامات المجهزة لمنع SQLi، حماية جلسات العمل ورموز CSRF، وتطبيق صلاحيات RBAC لمنع تجاوز الامتيازات.</span>
+        <h3 class="text-lg font-bold"><span class="lang-en">MedConnect — Secure Medical Architecture</span><span class="lang-ar">منصة MedConnect المحمية مع RBAC</span></h3>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--ink-soft);">
+          <span class="lang-en">Full-stack web application designed with security-first architecture. Features strict Role-Based Access Control (RBAC), parameterized ORM queries preventing SQL injection, CSRF tokens, and tamper-resistant session handling.</span>
+          <span class="lang-ar">تطبيق ويب كامل مبني بمعايير أمنية دفاعية: تطبيق صارم لصلاحيات المستخدمين (RBAC)، استعلامات محصنة ضد حقن قواعد البيانات (SQLi) عبر Prisma ORM، وحماية من تزوير الطلبات عبر المواقع (CSRF).</span>
         </p>
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="highlight-chip text-[0.68rem]">Node.js</span>
-          <span class="highlight-chip text-[0.68rem]">Express</span>
-          <span class="highlight-chip text-[0.68rem]">Prisma ORM</span>
-          <span class="highlight-chip text-[0.68rem]">MySQL</span>
-          <span class="highlight-chip text-[0.68rem]">RBAC Security</span>
+          <span class="highlight-chip">Node.js</span>
+          <span class="highlight-chip">Express</span>
+          <span class="highlight-chip">Prisma ORM</span>
+          <span class="highlight-chip">Access Control (RBAC)</span>
         </div>
       </div>
       <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color:var(--line);">
-        <span class="mono text-xs" style="color:var(--green);">DEFENSE-IN-DEPTH</span>
-        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs hover:text-red-400">View Project ↗</a>
+        <span class="mono text-xs" style="color:var(--ink-soft);">STATUS: PRODUCTION READY</span>
+        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs font-bold" style="color:var(--navy);">
+          <span class="lang-en">View Source ↗</span><span class="lang-ar">الكود المصدري ↗</span>
+        </a>
       </div>
     </div>
 
     <!-- Project 4 -->
-    <div class="dossier-card p-6 reveal flex flex-col justify-between" style="transition-delay:.24s;">
+    <div class="dossier-card p-6 reveal flex flex-col justify-between" style="transition-delay:.2s;">
       <div>
         <div class="flex items-center justify-between gap-2 mb-3">
-          <span class="mono text-xs px-2 py-0.5 rounded" style="background:rgba(227,179,65,0.12); color:var(--gold);">ALGORITHMS &amp; ENCRYPTION</span>
-          <span class="mono text-xs" style="color:var(--ink-soft);">ACADEMIC RESEARCH</span>
+          <span class="badge-tag">OP: CRYPTO-ALGO</span>
+          <span class="mono text-xs" style="color:var(--navy);">TLP:CLEAR</span>
         </div>
-        <h3 class="text-lg font-bold mb-2">Data Compression &amp; Entropy Analyzer</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--ink-soft);">
-          <span class="lang-en">Comparative cryptographic and payload analysis tool implementing Huffman and Arithmetic coding. Evaluates byte distribution, entropy metrics, and bandwidth efficiency for optimized payload delivery and secure transmission.</span>
-          <span class="lang-ar">أداة مقارنة وتحليل إنتروبيا وتشفير البيانات بتطبيق خوارزميات Huffman وArithmetic Coding. فحص وتوزيع البايتات وحساب كفاءة ضغط الحمولات وتشفيرها لتقليل البصمة الشبكية.</span>
+        <h3 class="text-lg font-bold"><span class="lang-en">Data Payload Compression &amp; Obfuscation</span><span class="lang-ar">محرك ضغط البيانات وتشفير الترميز</span></h3>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--ink-soft);">
+          <span class="lang-en">Implementation of Huffman and Arithmetic coding compression algorithms in Python. Evaluates transmission overhead reduction, entropy levels, and efficiency for exfiltration simulation and bandwidth optimization.</span>
+          <span class="lang-ar">تطبيق خوارزميات ضغط البيانات والتشفير غير الفاقد (Huffman &amp; Arithmetic Coding) لتحليل تقليل الإنتروبيا وتحسين كفاءة نقل البيانات في البيئات المقيدة.</span>
         </p>
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="highlight-chip text-[0.68rem]">Python</span>
-          <span class="highlight-chip text-[0.68rem]">Information Theory</span>
-          <span class="highlight-chip text-[0.68rem]">Binary Streams</span>
-          <span class="highlight-chip text-[0.68rem]">GUI</span>
+          <span class="highlight-chip">Python</span>
+          <span class="highlight-chip">Huffman Coding</span>
+          <span class="highlight-chip">Arithmetic Coding</span>
+          <span class="highlight-chip">Data Optimization</span>
         </div>
       </div>
       <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color:var(--line);">
-        <span class="mono text-xs" style="color:var(--ink-soft);">EVALUATED: ECU 2026</span>
-        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs hover:text-red-400">View Source ↗</a>
+        <span class="mono text-xs" style="color:var(--ink-soft);">STATUS: COMPLETE</span>
+        <a href="https://github.com/Kareemtamer159" target="_blank" rel="noopener" class="mono text-xs font-bold" style="color:var(--navy);">
+          <span class="lang-en">View Source ↗</span><span class="lang-ar">الكود المصدري ↗</span>
+        </a>
       </div>
     </div>
 
@@ -733,7 +708,7 @@
 <!-- CERTIFICATIONS -->
 <section id="certifications" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
   <p class="mono text-xs mb-2" style="color:var(--ink-soft);">EXHIBIT D — <span class="lang-en">CREDENTIALS ON FILE</span><span class="lang-ar">الشهادات الموثقة</span></p>
-  <p class="text-sm mb-8 max-w-lg" style="color:var(--ink-soft);"><span class="lang-en">Verifiable online: certificates link to their public verification pages. Hands-on security lab work is visible on GitHub and live platforms.</span><span class="lang-ar">قابلة للتحقق أونلاين: شهادات الكورسات مرفقة بروابط تحقق رسمية، والتدريبات العملية موثقة على المنصات العالمية.</span></p>
+  <p class="text-sm mb-8 max-w-lg" style="color:var(--ink-soft);"><span class="lang-en">Verifiable online: course certificates link to their public verification page, and hands-on work is visible on GitHub.</span><span class="lang-ar">قابلة للتحقق أونلاين: شهادات الكورسات فيها لينك تحقق رسمي، والشغل العملي موجود ومتاح على GitHub.</span></p>
 
   <div class="grid sm:grid-cols-2 gap-4 mb-10">
     <div class="dossier-card reveal p-5 flex items-center gap-4">
@@ -753,8 +728,8 @@
     <div class="dossier-card reveal p-5 flex items-center gap-4" style="transition-delay:.1s;">
       <div class="seal">NTI<br/>90H</div>
       <div>
-        <h4 class="text-sm font-bold">Cisco Cybersecurity Specialized Training</h4>
-        <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">National Telecommunication Institute (NTI) · 90h · 2025</span><span class="lang-ar">المعهد القومي للاتصالات (NTI) · 90 ساعة · 2025</span></p>
+        <h4 class="text-sm font-bold">Cisco Cybersecurity</h4>
+        <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">Ministry of Comm. &amp; IT — NTI · 90h · 2025</span><span class="lang-ar">وزارة الاتصالات — NTI · 90 ساعة · 2025</span></p>
       </div>
     </div>
     <div class="dossier-card reveal p-5 flex items-center gap-4" style="transition-delay:.15s;">
@@ -796,36 +771,45 @@
     <div class="field-row"><span class="text-sm"><span class="lang-en">Academic Advising Conference — "MedConnect" project</span><span class="lang-ar">مؤتمر الإرشاد الأكاديمي — مشروع "MedConnect"</span></span><span class="mono text-xs" style="color:var(--ink-soft);">ECU · Feb 2026</span></div>
   </div>
 
-  <p class="mono text-xs mb-4" style="color:var(--ink-soft);"><span class="lang-en">ACTIVE TRAINING — IN PROGRESS PLATFORMS</span><span class="lang-ar">منصات ومسارات هجومية قيد التنفيذ</span></p>
+  <p class="mono text-xs mb-4" style="color:var(--ink-soft);"><span class="lang-en">ACTIVE TRAINING &amp; PLATFORM ENGAGEMENT</span><span class="lang-ar">المنصات التفاعلية والتدريب العملي المستمر</span></p>
   <div class="grid sm:grid-cols-3 gap-4">
     <div class="dossier-card reveal p-5 border-l-4" style="border-left-color:var(--red);">
-      <p class="text-xs mono" style="color:var(--red);">HACK THE BOX</p>
-      <p class="text-sm font-bold mt-1"><span class="lang-en">CPTS Job Path</span><span class="lang-ar">مسار CPTS الاحترافي</span></p>
-      <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">Certified Penetration Testing Specialist</span><span class="lang-ar">مختص اختبار الاختراق المعتمد</span></p>
+      <div class="flex items-center justify-between">
+        <span class="mono text-xs font-bold" style="color:var(--red);">HTB ACADEMY</span>
+        <span class="badge-tag">IN PROGRESS</span>
+      </div>
+      <p class="text-base font-bold mt-2"><span class="lang-en">CPTS Path</span><span class="lang-ar">مسار CPTS</span></p>
+      <p class="mono text-xs mt-1" style="color:var(--ink-soft);">Certified Penetration Testing Specialist</p>
     </div>
-    <div class="dossier-card reveal p-5 border-l-4" style="border-left-color:var(--navy); transition-delay:.06s;">
-      <p class="text-xs mono" style="color:var(--navy);">PORTSWIGGER</p>
-      <p class="text-sm font-bold mt-1">Web Security Academy</p>
-      <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">SQLi, XSS, CSRF, SSRF, IDOR Labs</span><span class="lang-ar">معامل استغلال ثغرات الويب المتقدمة</span></p>
+    <div class="dossier-card reveal p-5 border-l-4" style="border-left-color:var(--gold); transition-delay:.06s;">
+      <div class="flex items-center justify-between">
+        <span class="mono text-xs font-bold" style="color:var(--gold);">PORTSWIGGER</span>
+        <span class="badge-tag">PRACTITIONER</span>
+      </div>
+      <p class="text-base font-bold mt-2">Web Security Academy</p>
+      <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">SQLi, XSS, SSRF, CSRF &amp; IDOR Labs</span><span class="lang-ar">معامل استغلال وتأمين ثغرات الويب</span></p>
     </div>
-    <div class="dossier-card reveal p-5 border-l-4" style="border-left-color:var(--gold); transition-delay:.12s;">
-      <p class="text-xs mono" style="color:var(--gold);">TRYHACKME</p>
-      <p class="text-sm font-bold mt-1">Offensive Security &amp; CTF</p>
-      <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">Privilege Escalation &amp; Active Directory</span><span class="lang-ar">تصعيد الصلاحيات واختراق الأنظمة</span></p>
+    <div class="dossier-card reveal p-5 border-l-4" style="border-left-color:var(--navy); transition-delay:.12s;">
+      <div class="flex items-center justify-between">
+        <span class="mono text-xs font-bold" style="color:var(--navy);">TRYHACKME</span>
+        <span class="badge-tag">ACTIVE</span>
+      </div>
+      <p class="text-base font-bold mt-2">Hands-on CTF &amp; Labs</p>
+      <p class="mono text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">Vulnversity, Nmap, Network Rooms</span><span class="lang-ar">غرف الاختراق العملي والشبكات</span></p>
     </div>
   </div>
 </section>
 
 <!-- LABS / FIELD NOTES -->
 <section id="labs" class="max-w-5xl mx-auto px-6 py-16 md:py-20 perf">
-  <p class="mono text-xs mb-8" style="color:var(--ink-soft);">EXHIBIT E — <span class="lang-en">FIELD NOTES &amp; EXPLOITATION WRITE-UPS</span><span class="lang-ar">ملاحظات ميدانية وتقارير ثغرات تفاعلية</span></p>
+  <p class="mono text-xs mb-8" style="color:var(--ink-soft);">EXHIBIT E — <span class="lang-en">FIELD NOTES</span><span class="lang-ar">ملاحظات ميدانية</span></p>
 
-  <p class="mono text-xs mb-4" style="color:var(--ink-soft);"><span class="lang-en">TESTING METHODOLOGY</span><span class="lang-ar">منهجية الاختبار المتبعة</span></p>
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12">
+  <p class="mono text-xs mb-4" style="color:var(--ink-soft);"><span class="lang-en">TESTING METHODOLOGY</span><span class="lang-ar">منهجية الاختبار</span></p>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-14">
     <div class="dossier-card reveal p-4 text-center">
       <p class="mono text-xs" style="color:var(--red);">01</p>
       <p class="text-sm font-bold mt-1"><span class="lang-en">Recon</span><span class="lang-ar">استطلاع</span></p>
-      <p class="text-xs mt-1" style="color:var(--ink-soft);">Nmap &amp; OSINT</p>
+      <p class="text-xs mt-1" style="color:var(--ink-soft);">Nmap · Amass</p>
     </div>
     <div class="dossier-card reveal p-4 text-center" style="transition-delay:.06s;">
       <p class="mono text-xs" style="color:var(--red);">02</p>
@@ -834,77 +818,13 @@
     </div>
     <div class="dossier-card reveal p-4 text-center" style="transition-delay:.12s;">
       <p class="mono text-xs" style="color:var(--red);">03</p>
-      <p class="text-sm font-bold mt-1"><span class="lang-en">Exploit &amp; Elevate</span><span class="lang-ar">استغلال وتصعيد</span></p>
+      <p class="text-sm font-bold mt-1"><span class="lang-en">Exploit &amp; Validate</span><span class="lang-ar">استغلال وإثبات</span></p>
       <p class="text-xs mt-1" style="color:var(--ink-soft);">Metasploit · Python</p>
     </div>
     <div class="dossier-card reveal p-4 text-center" style="transition-delay:.18s;">
       <p class="mono text-xs" style="color:var(--red);">04</p>
       <p class="text-sm font-bold mt-1"><span class="lang-en">Report &amp; Remediate</span><span class="lang-ar">تقرير وإصلاح</span></p>
-      <p class="text-xs mt-1" style="color:var(--ink-soft);">Executive POC</p>
-    </div>
-  </div>
-
-  <!-- Interactive Case Write-ups -->
-  <div class="mb-12">
-    <p class="mono text-xs mb-4" style="color:var(--ink-soft);"><span class="lang-en">TACTICAL WRITE-UP ARCHIVE (CLICK TO DECLASSIFY DETAILS)</span><span class="lang-ar">أرشيف تقارير الثغرات (اضغط على السيناريو لعرض التفاصيل)</span></p>
-    
-    <div class="space-y-3">
-      <!-- Writeup 1 -->
-      <div class="writeup-item reveal">
-        <div class="writeup-header">
-          <div class="flex items-center gap-3">
-            <span class="mono text-xs px-2 py-0.5 rounded font-bold" style="background:rgba(255,71,87,0.15); color:var(--red);">CRITICAL</span>
-            <span class="text-sm font-bold">Case Log #01: Insecure Direct Object Reference (IDOR) to Account Takeover</span>
-          </div>
-          <span class="writeup-icon mono text-sm">▶</span>
-        </div>
-        <div class="writeup-content p-5 text-sm space-y-3">
-          <p><strong class="text-white">Attack Vector:</strong> Parameter tampering on user identifier parameters within the profile update API route (`/api/v1/users/{id}/email`).</p>
-          <div class="code p-3 rounded text-xs overflow-x-auto bg-[#0A0C10] text-[#7EE787]">
-            # PoC: Modifying target user's recovery email without session validation<br/>
-            PUT /api/v1/users/1042/settings HTTP/1.1<br/>
-            Host: target.internal<br/>
-            Authorization: Bearer [attacker_token]<br/>
-            Content-Type: application/json<br/><br/>
-            {"email": "attacker@pwned.net", "role": "admin"}
-          </div>
-          <p><strong style="color:var(--green);">Remediation Implemented:</strong> Enforced server-side session claim validation against requested resource IDs and implemented contextual Object-Level Permissions.</p>
-        </div>
-      </div>
-
-      <!-- Writeup 2 -->
-      <div class="writeup-item reveal" style="transition-delay:.06s;">
-        <div class="writeup-header">
-          <div class="flex items-center gap-3">
-            <span class="mono text-xs px-2 py-0.5 rounded font-bold" style="background:rgba(227,179,65,0.15); color:var(--gold);">HIGH</span>
-            <span class="text-sm font-bold">Case Log #02: Time-Based Blind SQL Injection Automated Extraction</span>
-          </div>
-          <span class="writeup-icon mono text-sm">▶</span>
-        </div>
-        <div class="writeup-content p-5 text-sm space-y-3">
-          <p><strong class="text-white">Attack Vector:</strong> Unsanitized input injected into an unindexed search filtering header triggering arbitrary sleep conditions in PostgreSQL.</p>
-          <div class="code p-3 rounded text-xs overflow-x-auto bg-[#0A0C10] text-[#7EE787]">
-            # Python Threaded Exploit Payload Snippet<br/>
-            payload = f"'; SELECT CASE WHEN (ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),{idx},1))={char_code}) THEN pg_sleep(5) ELSE pg_sleep(0) END;--"
-          </div>
-          <p><strong style="color:var(--green);">Remediation Implemented:</strong> Transitioned dynamic query concatenation to parameterized Prepared Statements with ORM query constraints.</p>
-        </div>
-      </div>
-
-      <!-- Writeup 3 -->
-      <div class="writeup-item reveal" style="transition-delay:.12s;">
-        <div class="writeup-header">
-          <div class="flex items-center gap-3">
-            <span class="mono text-xs px-2 py-0.5 rounded font-bold" style="background:rgba(90,169,230,0.15); color:var(--navy);">MEDIUM</span>
-            <span class="text-sm font-bold">Case Log #03: Unrestricted File Upload Bypass to Stored Execution</span>
-          </div>
-          <span class="writeup-icon mono text-sm">▶</span>
-        </div>
-        <div class="writeup-content p-5 text-sm space-y-3">
-          <p><strong class="text-white">Attack Vector:</strong> MIME-type spoofing and double-extension evasion (`avatar.php.png`) bypassing front-end validation to deliver a lightweight web shell.</p>
-          <p><strong style="color:var(--green);">Remediation Implemented:</strong> Re-encoded uploaded images via server-side image processing libraries, randomized filenames, and stored assets on isolated S3 buckets stripped of execution privileges.</p>
-        </div>
-      </div>
+      <p class="text-xs mt-1" style="color:var(--ink-soft);"><span class="lang-en">CVSS &amp; Fixes</span><span class="lang-ar">توثيق وحلول</span></p>
     </div>
   </div>
 
@@ -912,30 +832,30 @@
     <div class="reveal">
       <h4 class="text-sm font-bold mb-3" style="color:var(--red);"><span class="lang-en">Vulnerability Focus</span><span class="lang-ar">تركيز الثغرات</span></h4>
       <ul class="space-y-2 text-sm" style="color:var(--ink-soft);">
-        <li>— SQL Injection (SQLi &amp; Blind)</li>
-        <li>— Cross-Site Scripting (Stored &amp; Reflected)</li>
-        <li>— Insecure Direct Object Reference (IDOR)</li>
+        <li>— SQL Injection (Boolean, Time-based, Error)</li>
+        <li>— Cross-Site Scripting (Reflected &amp; Stored)</li>
+        <li>— Broken Object Level Auth (BOLA / IDOR)</li>
         <li>— Server-Side Request Forgery (SSRF)</li>
         <li>— Cross-Site Request Forgery (CSRF)</li>
       </ul>
     </div>
     <div class="reveal" style="transition-delay:.08s;">
-      <h4 class="text-sm font-bold mb-3" style="color:var(--navy);"><span class="lang-en">Primary Arsenal</span><span class="lang-ar">أدوات الاختبار</span></h4>
+      <h4 class="text-sm font-bold mb-3" style="color:var(--red);"><span class="lang-en">Tooling</span><span class="lang-ar">الأدوات</span></h4>
       <ul class="space-y-2 text-sm" style="color:var(--ink-soft);">
-        <li>— Burp Suite Professional</li>
-        <li>— Nmap Network Mapper</li>
-        <li>— Metasploit Framework</li>
-        <li>— Wireshark Packet Inspector</li>
-        <li>— Custom Python Tooling</li>
+        <li>Burp Suite Community &amp; Pro</li>
+        <li>Nmap Network Scanner</li>
+        <li>Metasploit Framework</li>
+        <li>Wireshark Protocol Analyzer</li>
+        <li><span class="lang-en">Custom Python exploitation scripts</span><span class="lang-ar">أدوات بايثون مخصصة للاستغلال</span></li>
       </ul>
     </div>
     <div class="reveal" style="transition-delay:.16s;">
-      <h4 class="text-sm font-bold mb-3" style="color:var(--gold);"><span class="lang-en">Lab Grounds</span><span class="lang-ar">ميادين التدريب</span></h4>
+      <h4 class="text-sm font-bold mb-3" style="color:var(--red);"><span class="lang-en">Practice Grounds</span><span class="lang-ar">أماكن التدريب</span></h4>
       <ul class="space-y-2 text-sm" style="color:var(--ink-soft);">
-        <li>— Hack The Box — <span class="lang-en">CPTS path</span><span class="lang-ar">مسار CPTS</span></li>
-        <li>— TryHackMe (THM) Active Rooms</li>
-        <li>— PortSwigger Web Security Academy</li>
-        <li>— National CTF Competitions</li>
+        <li>Hack The Box — <span class="lang-en">CPTS path</span><span class="lang-ar">مسار CPTS</span></li>
+        <li>TryHackMe (THM)</li>
+        <li>PortSwigger Web Security Academy</li>
+        <li><span class="lang-en">CTF competitions &amp; University Labs</span><span class="lang-ar">مسابقات CTF ومعامل الجامعة</span></li>
       </ul>
     </div>
   </div>
@@ -948,19 +868,12 @@
       <p class="mono text-xs mb-4" style="color:var(--ink-soft);">EXHIBIT F — <span class="lang-en">CLOSING STATEMENT</span><span class="lang-ar">خاتمة الملف</span></p>
       <h2 class="text-3xl md:text-4xl font-bold leading-tight">
         <span class="lang-en">Open to penetration testing roles &amp; CTF collabs</span>
-        <span class="lang-ar">مستعد لوظائف اختبار اختراق ومشاريع أمنية</span>
+        <span class="lang-ar">مفتوح لوظائف اختبار اختراق وتعاون في CTF</span>
       </h2>
       <p class="mt-5 text-base leading-relaxed max-w-sm" style="color:var(--ink-soft);">
-        <span class="lang-en">Currently seeking penetration testing roles, offensive security projects and CTF collaborations. Download the dossier or initiate direct contact below.</span>
-        <span class="lang-ar">أبحث حالياً عن فرص وظيفية في اختبار الاختراق والأمن الهجومي، ومستعد للتعاون في مسابقات الـ CTF. يمكنك تحميل الـ CV أو التواصل مباشرة.</span>
+        <span class="lang-en">Currently seeking penetration testing roles, offensive security projects and CTF collaborations. Send over the details and let's talk.</span>
+        <span class="lang-ar">حاليًا بدوّر على وظيفة اختبار اختراق أو مشروع أمن هجومي، ومفتوح للتعاون في مسابقات CTF. ابعتلي التفاصيل ونتكلم.</span>
       </p>
-      
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="resume.pdf" download="Kareem_Tamer_CV.pdf" class="stamp inline-flex items-center gap-2 px-4 py-2.5 text-xs border-2" style="border-color:var(--gold); color:var(--gold); background:rgba(227,179,65,0.08);">
-          <span>↓</span> <span class="lang-en">Download CV (PDF)</span><span class="lang-ar">تحميل السيرة الذاتية</span>
-        </a>
-      </div>
-
       <div class="mt-8 hidden md:block">
         <svg width="150" height="60" viewBox="0 0 150 60" style="color:var(--red); opacity:0.8;">
           <path d="M5 40 C 20 10, 30 50, 45 25 S 70 5, 85 30 S 110 45, 130 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -984,7 +897,7 @@
         <div class="contact-row" style="border-color:var(--line);">
           <span class="contact-badge">in</span>
           <a href="https://www.linkedin.com/in/kareem-tamer-481894290/" target="_blank" rel="noopener" class="contact-link">
-            <span class="text-sm"><span class="lang-en">LinkedIn — Kareem Tamer</span><span class="lang-ar">حساب LinkedIn</span></span>
+            <span class="text-sm"><span class="lang-en">LinkedIn profile</span><span class="lang-ar">حساب LinkedIn</span></span>
           </a>
           <span class="mono text-xs" style="color:var(--ink-soft);">↗</span>
         </div>
@@ -1007,24 +920,49 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="border-t-2 py-6" style="border-color:var(--ink);">
   <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-2 mono text-xs" style="color:var(--ink-soft);">
-    <span>© 2026 Kareem Tamer — <span class="lang-en">case file closed</span><span class="lang-ar">تم إغلاق وتوثيق الملف</span></span>
-    <span><span class="lang-en">status: reviewed &amp; verified</span><span class="lang-ar">الأمن الهجومي · 2026</span></span>
+    <span>© 2026 Kareem Tamer — <span class="lang-en">case file closed</span><span class="lang-ar">تم إغلاق الملف</span></span>
+    <span><span class="lang-en">status: reviewed &amp; verified</span><span class="lang-ar">تمت المراجعة والتوثيق</span></span>
   </div>
 </footer>
 
-<script>
-  // Tactical Toast Notification Trigger
-  function showToast(msg){
-    const toast = document.getElementById('tacticalToast');
-    const toastMsg = document.getElementById('toastMsg');
-    toastMsg.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => { toast.classList.remove('show'); }, 2400);
-  }
+<!-- FLOATING CYBER TERMINAL HUD BUTTON -->
+<button id="floatingTermToggle" class="fixed bottom-6 right-6 z-40 stamp text-xs px-3.5 py-2.5 rounded-full border-2 shadow-2xl flex items-center gap-2 cursor-pointer transition-transform hover:scale-105" style="background:var(--card); border-color:var(--red); color:var(--ink);">
+  <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+  <span class="mono font-bold">&gt;_ KT-SHELL</span>
+</button>
 
-  // ambient floating dust / light-mote background
+<!-- INTERACTIVE TERMINAL MODAL -->
+<div id="terminalModal" role="dialog" aria-label="Interactive Shell">
+  <div class="term-header">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
+      <span class="text-xs ml-2 mono" style="color:#A0AEC0;">kt-offensive-shell v2.6 [TLP:CLEAR]</span>
+    </div>
+    <button id="closeTermBtn" class="text-xs mono px-2 py-0.5 rounded hover:bg-red-600 text-white cursor-pointer">✕</button>
+  </div>
+  <div id="termOutput" class="term-body">
+    <p style="color:#FF4757; font-weight:bold;">=== KAREEM TAMER // OFFENSIVE SECURITY DOSSIER ===</p>
+    <p style="color:#8C8778;">Type <span style="color:#2ED573;">'help'</span> to view available commands. Try <span style="color:#2ED573;">'whoami'</span>, <span style="color:#2ED573;">'projects'</span>, or <span style="color:#2ED573;">'scan'</span>.</p>
+  </div>
+  <div class="p-2 border-t flex items-center gap-2" style="background:#0E121A; border-color:#262B34;">
+    <span class="term-prompt text-xs">guest@kt-sec:~$</span>
+    <input type="text" id="termInput" class="term-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type a command..." />
+  </div>
+</div>
+
+<!-- TACTICAL TOAST -->
+<div id="tacticalToast" class="flex items-center gap-3 px-4 py-2.5 rounded mono text-xs">
+  <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+  <span id="toastMsg">[SYSTEM: ACTION COMPLETE]</span>
+</div>
+
+<script>
+  // Ambient particle background
   (function(){
     const canvas = document.getElementById('dustCanvas');
     const ctx = canvas.getContext('2d');
@@ -1068,7 +1006,7 @@
     drawFrame();
   })();
 
-  // Language toggle (EN / AR)
+  // Language Toggle
   function toggleLang(){
     const body = document.body;
     const html = document.getElementById('htmlRoot');
@@ -1076,12 +1014,11 @@
     body.classList.toggle('show-ar', goingAr);
     html.setAttribute('lang', goingAr ? 'ar' : 'en');
     html.setAttribute('dir', goingAr ? 'rtl' : 'ltr');
-    showToast(goingAr ? '[النظام: تم تحويل اللغة إلى العربية]' : '[SYSTEM: LOCALE SWITCHED TO EN]');
   }
   document.getElementById('langToggle').addEventListener('click', toggleLang);
   document.getElementById('langToggleMobile').addEventListener('click', toggleLang);
 
-  // Mobile navigation menu toggle
+  // Mobile Menu
   const menuBtn = document.getElementById('menuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   menuBtn.addEventListener('click', () => {
@@ -1103,7 +1040,7 @@
     }
   });
 
-  // Dark/light mode toggle
+  // Dark/Light Theme Toggle
   const modeBtn = document.getElementById('modeToggle');
   const modeBtnMobile = document.getElementById('modeToggleMobile');
   function applyMode(isLight){
@@ -1120,7 +1057,7 @@
   modeBtn.addEventListener('click', toggleMode);
   modeBtnMobile.addEventListener('click', toggleMode);
 
-  // Flashlight spotlight
+  // Spotlight effect
   const spotlight = document.getElementById('spotlight');
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1131,7 +1068,7 @@
     });
   }
 
-  // Scroll reveals and meters
+  // Reveal animations
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1146,6 +1083,7 @@
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
 
+  // Meter bars
   document.querySelectorAll('.meter-track').forEach(track => {
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1160,7 +1098,16 @@
     obs.observe(track);
   });
 
-  // Copy-to-clipboard with tactical toast
+  // Tactical Toast function
+  function showToast(msg){
+    const toast = document.getElementById('tacticalToast');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 2400);
+  }
+
+  // Copy to clipboard
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const text = btn.getAttribute('data-copy');
@@ -1172,198 +1119,217 @@
         try{ document.execCommand('copy'); }catch(e2){}
         document.body.removeChild(ta);
       }
-      const original = btn.textContent;
       btn.textContent = '✓';
       btn.classList.add('copied');
-      showToast(`[SYSTEM: COPIED "${text}" TO CLIPBOARD]`);
-      setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+      showToast('[COPIED TO CLIPBOARD: ' + text + ']');
+      setTimeout(() => { btn.textContent = '⧉'; btn.classList.remove('copied'); }, 1800);
     });
   });
 
-  // Interactive Write-ups Accordion
-  document.querySelectorAll('.writeup-header').forEach(hdr => {
-    hdr.addEventListener('click', () => {
-      const parent = hdr.parentElement;
-      parent.classList.toggle('active');
-    });
-  });
+  // =================================================================
+  // REDACT DECLASSIFICATION: 60-SECOND INDEPENDENT TIMERS & UNSCRAMBLE
+  // =================================================================
+  (function(){
+    const redactEls = document.querySelectorAll('.redact');
+    const redactTimers = new Map();
 
-  // Decryption Scramble Effect for Redacted Text
-  const chars = 'ABCDEF0123456789!@#$%^&*<>[]{}~';
-  document.querySelectorAll('.redact[data-scramble="true"]').forEach(el => {
-    const originalText = el.textContent;
-    let scrambling = false;
-    el.addEventListener('mouseenter', () => {
-      if(scrambling) return;
-      scrambling = true;
-      let iterations = 0;
+    function runUnscramble(el) {
+      const original = el.getAttribute('data-original') || el.textContent.trim();
+      el.setAttribute('data-original', original);
+      const glyphs = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789';
+      let iteration = 0;
+      const totalSteps = original.length;
+
       const interval = setInterval(() => {
-        el.textContent = originalText.split('').map((letter, index) => {
-          if(index < iterations) return originalText[index];
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-        if(iterations >= originalText.length){
-          clearInterval(interval);
-          el.textContent = originalText;
-          scrambling = false;
-        }
-        iterations += 1/2;
-      }, 30);
-    });
-  });
+        el.textContent = original
+          .split('')
+          .map((ch, idx) => {
+            if (ch === ' ') return ' ';
+            if (idx < iteration) return original[idx];
+            return glyphs[Math.floor(Math.random() * glyphs.length)];
+          })
+          .join('');
 
-  // INTERACTIVE CYBER TERMINAL (CLI)
-  const termModal = document.getElementById('termModal');
+        if (iteration >= totalSteps) {
+          clearInterval(interval);
+          el.textContent = original;
+        }
+        iteration += 1;
+      }, 25);
+    }
+
+    function declassifyRedact(el) {
+      if (!el.classList.contains('declassified')) {
+        runUnscramble(el);
+      }
+      el.classList.add('declassified');
+      showToast('[CONFIDENTIAL: DECLASSIFIED FOR 60 SECONDS]');
+
+      if (redactTimers.has(el)) {
+        clearTimeout(redactTimers.get(el));
+      }
+
+      // 60 seconds independent timer
+      const timerId = setTimeout(() => {
+        el.classList.remove('declassified');
+        const original = el.getAttribute('data-original');
+        if (original) el.textContent = original;
+        redactTimers.delete(el);
+        showToast('[SECURITY PROTOCOL: ITEM RE-REDACTED]');
+      }, 60000);
+
+      redactTimers.set(el, timerId);
+    }
+
+    redactEls.forEach(el => {
+      el.setAttribute('data-original', el.textContent.trim());
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        declassifyRedact(el);
+      });
+      el.addEventListener('mouseenter', () => {
+        declassifyRedact(el);
+      });
+    });
+  })();
+
+  // =================================================================
+  // INTERACTIVE CYBER TERMINAL LOGIC
+  // =================================================================
+  const termModal = document.getElementById('terminalModal');
   const termInput = document.getElementById('termInput');
   const termOutput = document.getElementById('termOutput');
   const closeTermBtn = document.getElementById('closeTermBtn');
+  const floatingTermToggle = document.getElementById('floatingTermToggle');
+  const termNavBtn = document.getElementById('termNavBtn');
+  const termNavBtnMobile = document.getElementById('termNavBtnMobile');
+  const quickTerminalBtn = document.getElementById('quickTerminalBtn');
 
   function openTerminal(){
-    termModal.classList.add('open');
-    termInput.focus();
+    termModal.classList.add('active');
+    setTimeout(() => termInput.focus(), 50);
   }
   function closeTerminal(){
-    termModal.classList.remove('open');
+    termModal.classList.remove('active');
   }
 
-  document.getElementById('openTermNav').addEventListener('click', openTerminal);
-  document.getElementById('openTermMobile').addEventListener('click', openTerminal);
-  document.getElementById('heroTermTrigger').addEventListener('click', openTerminal);
+  [floatingTermToggle, termNavBtn, termNavBtnMobile, quickTerminalBtn].forEach(btn => {
+    if(btn) btn.addEventListener('click', openTerminal);
+  });
   closeTermBtn.addEventListener('click', closeTerminal);
 
-  window.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && termModal.classList.contains('open')) closeTerminal();
-    if(e.key === '`' && e.ctrlKey) {
-      if(termModal.classList.contains('open')) closeTerminal(); else openTerminal();
-    }
-  });
-
-  termInput.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter'){
-      const val = termInput.value.trim();
-      if(!val) return;
-      handleCommand(val);
-      termInput.value = '';
-    }
-  });
-
-  function logTerminal(html){
-    const row = document.createElement('div');
-    row.innerHTML = html;
-    termOutput.appendChild(row);
+  function printLine(html){
+    const p = document.createElement('p');
+    p.innerHTML = html;
+    termOutput.appendChild(p);
     termOutput.scrollTop = termOutput.scrollHeight;
   }
 
+  termInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      const cmd = termInput.value.trim();
+      termInput.value = '';
+      if(!cmd) return;
+      printLine('<span class="term-prompt">guest@kt-sec:~$</span> ' + cmd);
+      handleCommand(cmd.toLowerCase());
+    }
+  });
+
   function handleCommand(cmd){
-    logTerminal(`<div><span class="term-prompt">kareem@sec:~$</span> <span class="text-white">${escapeHtml(cmd)}</span></div>`);
-    const clean = cmd.toLowerCase().trim();
-
-    switch(clean){
+    switch(cmd){
       case 'help':
-        logTerminal(`<div class="text-[#E3B341] ml-2">
-Available Commands:<br/>
-&nbsp;• <strong class="text-white">whoami</strong>: Subject dossier overview<br/>
-&nbsp;• <strong class="text-white">skills</strong>: Penetration testing competencies<br/>
-&nbsp;• <strong class="text-white">tools</strong>: Offensive tooling &amp; weapon arsenal<br/>
-&nbsp;• <strong class="text-white">projects</strong>: Classified proof-of-work repositories<br/>
-&nbsp;• <strong class="text-white">exp</strong>: Active engagements &amp; internship history<br/>
-&nbsp;• <strong class="text-white">nmap</strong>: Audit target ports on localhost<br/>
-&nbsp;• <strong class="text-white">cv / resume</strong>: Download official verified CV (PDF)<br/>
-&nbsp;• <strong class="text-white">clear</strong>: Purge shell buffer<br/>
-&nbsp;• <strong class="text-white">exit</strong>: Terminate active shell session
-        </div>`);
+        printLine(`
+Available commands:
+  <span style="color:#5AA9E6;">whoami</span>      - Overview of Kareem Tamer
+  <span style="color:#5AA9E6;">projects</span>    - List classified operations & tools
+  <span style="color:#5AA9E6;">skills</span>      - Display technical offensive toolkit
+  <span style="color:#5AA9E6;">certs</span>       - Show verified credentials
+  <span style="color:#5AA9E6;">scan</span>        - Run mock Nmap security assessment
+  <span style="color:#5AA9E6;">cv</span>          - Download official resume dossier (PDF)
+  <span style="color:#5AA9E6;">contact</span>     - Show verified communication channels
+  <span style="color:#5AA9E6;">clear</span>       - Clear terminal screen
+  <span style="color:#5AA9E6;">exit</span>        - Close terminal interface
+        `);
         break;
-
       case 'whoami':
-        logTerminal(`<div class="text-green-400 ml-2">
-[+] SUBJECT: Kareem Tamer Ismael Saleh<br/>
-[+] ROLE: Aspiring Penetration Tester // Class of 2027<br/>
-[+] ACADEMY: Egyptian Chinese University (ECU) — B.Sc. Cyber Security<br/>
-[+] TRACK: Offensive Security, Web/Network Exploitation &amp; Tooling Automation
-        </div>`);
+        printLine(`
+<span style="color:#ECE5D4; font-weight:bold;">Kareem Tamer</span> — Aspiring Penetration Tester &amp; Cyber Security Senior at ECU.
+Focus: Web &amp; Network Exploitation, Red Teaming, Vulnerability Research.
+Active Trainee at DEPI &amp; MCDR (Misr El Maqassa).
+        `);
         break;
-
-      case 'skills':
-        logTerminal(`<div class="text-[#58A6FF] ml-2">
-[+] EXPLOITATION: SQLi, Blind SQLi, XSS (Stored/Reflected), IDOR, SSRF, CSRF<br/>
-[+] NETWORKING: Protocol Analysis (Wireshark, TCP/IP, ARP, DNS, Subnetting)<br/>
-[+] CODING: Python (Scapy, Requests, CustomTkinter, Sockets), Node.js, SQL, Bash
-        </div>`);
-        break;
-
-      case 'tools':
-        logTerminal(`<div class="text-[#FF4757] ml-2">
-[+] WEAPONRY: Burp Suite Pro, Nmap, Metasploit, Wireshark, SQLmap, VirtualBox/VMware, Kali Linux
-        </div>`);
-        break;
-
       case 'projects':
-        logTerminal(`<div class="text-[#C9D1D9] ml-2">
-1. <strong class="text-[#58A6FF]">Network Attack &amp; Defense Simulator</strong> (Python/Scapy)<br/>
-2. <strong class="text-[#58A6FF]">Custom Pentest Automation Scripts</strong> (Recon/IDOR/SQLi)<br/>
-3. <strong class="text-[#58A6FF]">MedConnect Secure Platform</strong> (Full-Stack/RBAC/Secure DB)<br/>
-4. <strong class="text-[#58A6FF]">Data Compression &amp; Obfuscation Tool</strong> (Entropy Analyzer)
-        </div>`);
+        printLine(`
+[1] <span style="color:#FF4757;">Network Attack &amp; Defense Simulator</span> (Python, CustomTkinter)
+[2] <span style="color:#FF4757;">Automated Web Recon &amp; Vulnerability Scanner</span> (Python, OWASP)
+[3] <span style="color:#FF4757;">MedConnect</span> - Secure RBAC Architecture (Node.js, Prisma, MySQL)
+[4] <span style="color:#FF4757;">Payload Compression &amp; Obfuscation Engine</span> (Huffman &amp; Arithmetic)
+Type 'github' to view all repositories.
+        `);
         break;
-
-      case 'exp':
-        logTerminal(`<div class="text-gray-300 ml-2">
-[2026-Present] Penetration Tester — DEPI Initiative (HTB CPTS Path)<br/>
-[2026-Aug/Sep] OffSec &amp; SOC Trainee — Misr for Central Clearing (MCDR) &amp; EGX<br/>
-[2025-Sep] Summer Intern — Commercial International Bank (CIB)
-        </div>`);
+      case 'github':
+        window.open('https://github.com/Kareemtamer159', '_blank');
+        printLine('<span style="color:#2ED573;">[+] Redirecting to GitHub profile...</span>');
         break;
-
-      case 'nmap':
-      case 'nmap localhost':
-      case 'nmap target':
-        logTerminal(`<div class="text-green-400 ml-2">
-Starting Nmap 7.94 ( https://nmap.org ) at 2026-09-12 18:00 EEST<br/>
-Nmap scan report for kareemtamer159.github.io (127.0.0.1)<br/>
-Host is up (0.00012s latency).<br/>
-Not shown: 996 closed tcp ports<br/>
-PORT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATE SERVICE&nbsp;&nbsp;&nbsp;VERSION<br/>
-22/tcp&nbsp;&nbsp;&nbsp;open&nbsp;&nbsp;ssh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSH 9.3p1 (Debian)<br/>
-80/tcp&nbsp;&nbsp;&nbsp;open&nbsp;&nbsp;http&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache/2.4.58 (Unix)<br/>
-443/tcp&nbsp;&nbsp;open&nbsp;&nbsp;ssl/https&nbsp;OpenSSL/3.0.11<br/>
-31337/tcp open&nbsp;&nbsp;elite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offensive-Sec-Terminal-v2<br/>
-Nmap done: 1 IP address scanned in 1.42 seconds
-        </div>`);
+      case 'skills':
+        printLine(`
+<span style="color:#E3B341;">Offensive:</span> Web Exploitation (SQLi, XSS, IDOR, SSRF, CSRF), Red Teaming
+<span style="color:#5AA9E6;">Tooling:</span> Burp Suite Pro, Nmap, Metasploit, Wireshark, Custom Python Tooling
+<span style="color:#2ED573;">Defensive:</span> Network Monitoring, Remediation Guidance, Secure RBAC Architecture
+        `);
         break;
-
+      case 'certs':
+        printLine(`
+[✓] Junior Cybersecurity Analyst - Cisco
+[✓] Introduction to Networking - NVIDIA
+[✓] Networking Fundamentals &amp; Physical Networks - Packt
+[✓] Cisco Cybersecurity 90h - Ministry of Comm. (NTI)
+[⏳] Certified Penetration Testing Specialist (CPTS) - HTB (In Progress)
+        `);
+        break;
+      case 'scan':
+        printLine('<span style="color:#E3B341;">[+] Starting Nmap 7.94 scan on target (eg-pt-2026.local)...</span>');
+        setTimeout(() => {
+          printLine(`
+PORT    STATE SERVICE       VERSION
+22/tcp  open  ssh           OpenSSH 9.2p1
+80/tcp  open  http          Apache httpd 2.4.56
+443/tcp open  ssl/https     OpenSSL 3.0.8
+<span style="color:#2ED573;">[+] Vulnerability Assessment: 2 Potential Vectors Detected (SQLi, IDOR)</span>
+<span style="color:#FF4757;">[+] Penetration Testing Status: REMEDIATION ADVISORY ISSUED</span>
+          `);
+        }, 600);
+        break;
       case 'cv':
       case 'resume':
-      case 'cat resume.pdf':
-        logTerminal(`<div class="text-[#E3B341] ml-2">
-[+] Initializing encrypted transmission: Kareem_Tamer_CV.pdf...<br/>
-[+] Download triggered. Check your browser downloads directory.
-        </div>`);
-        const link = document.createElement('a');
-        link.href = 'resume.pdf';
-        link.download = 'Kareem_Tamer_CV.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        showToast('[SYSTEM: DOSSIER PDF TRANSMISSION INITIATED]');
+        printLine('<span style="color:#2ED573;">[+] Fetching Kareem_Tamer_CV.pdf...</span>');
+        const dlLink = document.createElement('a');
+        dlLink.href = './Kareem_Tamer_CV.pdf';
+        dlLink.download = 'Kareem_Tamer_CV.pdf';
+        dlLink.target = '_blank';
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+        showToast('[DOSSIER DOWNLOAD INITIATED: OK]');
         break;
-
+      case 'contact':
+        printLine(`
+Email:    kareem.tamer.ismael@gmail.com
+Phone:    01141483811
+LinkedIn: linkedin.com/in/kareem-tamer-481894290
+GitHub:   github.com/Kareemtamer159
+        `);
+        break;
       case 'clear':
         termOutput.innerHTML = '';
         break;
-
       case 'exit':
       case 'quit':
         closeTerminal();
         break;
-
       default:
-        logTerminal(`<div class="text-red-400 ml-2">Command not found: "${escapeHtml(clean)}". Type <strong class="text-yellow-400">help</strong> to view valid operations.</div>`);
-        break;
+        printLine(`<span style="color:#FF4757;">Command not recognized: '${cmd}'. Type 'help' for available options.</span>`);
     }
-  }
-
-  function escapeHtml(text){
-    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 </script>
 </body>
